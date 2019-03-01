@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "330319548501",
+    "firebase_url": "https://gifting-app.firebaseio.com",
+    "project_id": "gifting-app",
+    "storage_bucket": "gifting-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330319548501:android:610b59f4c7ce15e0",
+        "android_client_info": {
+          "package_name": "com.example.giftingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330319548501-c9h7ia8d78iio38m3k7tsn748sof51fe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.giftingapp",
+            "certificate_hash": "62096f19b8a21f64cbd2065e0b949b293c4c8ce4"
+          }
+        },
+        {
+          "client_id": "330319548501-f67ai9f6cu4hlc2sug1qo4uhpetonntr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8dNiTfg8bmr_Hq0xVaKYLG_rWMPMci9A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330319548501-f67ai9f6cu4hlc2sug1qo4uhpetonntr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
