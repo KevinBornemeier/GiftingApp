@@ -31,11 +31,11 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextUsername"
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:ems="10"
-            android:hint="Username"
+            android:hint="Email"
             android:inputType="textPersonName" />
 
         <EditText
@@ -78,5 +78,13 @@
             android:text="Create Account"
             app:fontFamily="@font/alfa_slab_one"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
