@@ -1,18 +1,13 @@
 package com.example.giftingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 /*
 NOTES from 2/28 (KB) :
@@ -26,7 +21,7 @@ NOTES from 2/28 (KB) :
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //variable declarations
     String email = "UsernameTEST";
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     CheckBox checkBoxRememberMe;
 
-    private FirebaseAuth mAuth;
+
 
 
 
@@ -60,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        findViewById(R.id.buttonCreateAccount).setOnClickListener(this);
+
+
+
+
+
         //initialize EditText, Buttons, etc...
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -67,54 +70,36 @@ public class MainActivity extends AppCompatActivity {
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         buttonCreateAccount = (Button) findViewById(R.id.buttonCreateAccount);
 
-        mAuth = FirebaseAuth.getInstance();
 
 
 
-        //OnClickListener method: extracts input within the EditText when the Button is pressed.
-        buttonCreateAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email = editTextUsername.getText().toString();
-                password = editTextPassword.getText().toString();
 
-                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Registration error -- try again", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
+//        buttonSignIn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                email = editTextUsername.getText().toString();
+//                password = editTextPassword.getText().toString();
 //
-
-
-
-
-                //TEST
-                //showToast method: displays text
-                //showToast(username);
-                //showToast(password);
-
-            }
-        });
-
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email = editTextUsername.getText().toString();
-                password = editTextPassword.getText().toString();
-
-                //showToast method: displays text
-                showToast(email);
-                //showToast(password);
-            }
-        });
+//                //showToast method: displays text
+//                showToast(email);
+//                //showToast(password);
+//            }
+//        });
     }
+
+    //on click method: switches layouts (views) upon clicking a button
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.buttonCreateAccount:
+                startActivity(new Intent(this, SignUpActivity.class));
+                break;
+
+        }
+
+    }
+
+
 
     //showToast method: displays text
     private void showToast(String text) {

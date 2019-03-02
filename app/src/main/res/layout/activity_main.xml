@@ -16,7 +16,8 @@
         android:layout_marginTop="2dp"
         android:text="Gifting App"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="60sp" />
+        android:textSize="50sp"
+        app:fontFamily="@font/alfa_slab_one" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="131dp"
+        android:layout_marginTop="183dp"
         android:orientation="vertical">
 
         <EditText
@@ -67,13 +68,15 @@
             android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="76dp"
-            android:text="Sign In" />
+            android:text="Sign In"
+            app:fontFamily="@font/alfa_slab_one"/>
 
         <Button
             android:id="@+id/buttonCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:text="Create Account" />
+            android:text="Create Account"
+            app:fontFamily="@font/alfa_slab_one"/>
     </LinearLayout>
 
 </RelativeLayout>
