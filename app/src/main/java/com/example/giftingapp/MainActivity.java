@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         /*
-        if we reach this point, both the email and password are valid. -> create the account
+        if we reach this point, both the email and password are valid. -> sign in
          */
 
-        //set the progress bar visibility to visible.  Disable after registration is complete.
+        //set the progress bar visibility to visible.  Disable after sign in is complete.
         progressBar.setVisibility(View.VISIBLE);
 
         //sign in operation.
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                    //clear all activities on the slack and open a new activity.
+                    //clear all activities on the stack and open a new activity.
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
