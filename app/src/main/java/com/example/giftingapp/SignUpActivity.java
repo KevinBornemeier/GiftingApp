@@ -82,7 +82,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()) {
+                    finish();
                     Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignUpActivity.this, ProfileActivity.class));
                 }
                 else{
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
@@ -106,6 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
             case R.id.imageButtonBackArrow:
+                finish();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
 

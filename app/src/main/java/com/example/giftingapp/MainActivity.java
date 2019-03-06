@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
+                    finish();
                     Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                     //clear all activities on the stack and open a new activity.
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -124,11 +125,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    //Check to see if the user is currently logged in.
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() != null) {
+            finish();
+            startActivity(new Intent(this, ProfileActivity.class));
+        }
+    }
+
     //on click method: switches layouts (views) upon clicking a button
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.buttonCreateAccount:
+                finish();
                 startActivity(new Intent(this, SignUpActivity.class));
                 break;
             case R.id.buttonSignIn:

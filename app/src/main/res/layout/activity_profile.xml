@@ -52,6 +52,13 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:id="@+id/textViewVerified"
+        android:text="Verified"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"

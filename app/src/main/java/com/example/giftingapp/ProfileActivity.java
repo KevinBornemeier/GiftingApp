@@ -8,12 +8,18 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     ProgressBar progressBar;
     private static final int CHOOSE_IMAGE = 101;
     String profileImageUrl;
+    TextView textView;
 
     FirebaseAuth mAuth;
 
@@ -45,11 +52,12 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         mAuth = FirebaseAuth.getInstance();
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
-
+        textView = (TextView) findViewById(R.id.textViewVerified);
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+        loadUserInformation();
 
         findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +79,61 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
+    }
+
+
+    // Pull user information from the database including username, profile picture, and status of email verification.
+    // TODO: Implement password recovery and email changing options for users.
+
+    private void loadUserInformation() {
+        final FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            if (user.getPhotoUrl() != null) {
+                Glide.with(this)
+                        .load(user.getPhotoUrl().toString())
+                        .into(imageView);
+            }
+            if (user.getDisplayName() != null) {
+                editText.setText(user.getDisplayName());
+            }
+
+            if(user.isEmailVerified()) {
+                textView.setText("Email Verified.");
+            } else {
+                textView.setText("Email Not Verified (Click to Verify)");
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(ProfileActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                 });
+            }
+        }
+
+
+    }
+
+    /*
+    * TODO Note from Mike
+    * Right now the app will only determine a successful profile creation if the user enters a name
+    * AND uploads a photo.
+    *
+    * This method save the users profile information and stores it in firebase.
+    */
     private void saveUserInformation() {
         String displayName = editText.getText().toString();
 
@@ -146,6 +209,27 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+
+    //Create a menu button on the toolbar.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    //Dropdown menu, currently the only option is to logout to main sign in screen.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menuLogout:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+        }
+        return true;
+    }
 
     //method to allow the user to select an image.
     private void showImageChooser() {
