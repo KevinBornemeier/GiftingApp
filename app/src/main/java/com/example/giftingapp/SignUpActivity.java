@@ -6,9 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +24,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     EditText editTextEmail, editTextPassword;
     ProgressBar progressBar;
+    Animation frombottom, fromtop;
+    Button buttonCreateAccountSignUp;
+    TextView textViewSignUp;
 
     private FirebaseAuth mAuth;
 
@@ -28,6 +35,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //initialize animation
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
+
+        buttonCreateAccountSignUp = (Button) findViewById(R.id.buttonCreateAccountSignUp);
+        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
+
+        buttonCreateAccountSignUp.startAnimation(frombottom);
+        textViewSignUp.startAnimation(fromtop);
+
+
+
         editTextEmail = (EditText) findViewById(R.id.editTextEmailSignUp);
         editTextPassword = (EditText) findViewById(R.id.editTextPasswordSignUp);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -35,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.buttonCreateAccountSignUp).setOnClickListener(this);
-        findViewById(R.id.imageButtonBackArrow).setOnClickListener(this);
+        findViewById(R.id.textViewCreateAccountLoginReturn).setOnClickListener(this);
 
     }
 
@@ -107,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 registerUser();
 
                 break;
-            case R.id.imageButtonBackArrow:
+            case R.id.textViewCreateAccountLoginReturn:
                 finish();
                 startActivity(new Intent(this, MainActivity.class));
                 break;

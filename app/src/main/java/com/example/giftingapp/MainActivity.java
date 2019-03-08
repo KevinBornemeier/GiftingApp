@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.giftingapp.ProfileActivity;
+import com.example.giftingapp.R;
+import com.example.giftingapp.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -42,12 +46,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ProgressBar progressBar;
     FirebaseAuth mAuth;
 
+    ImageView imageViewBackground;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //initialize zoomed animation on login screen
+        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
+        imageViewBackground.animate().scaleX(2).scaleY(2).setDuration(3000).start();
 
         //initialize EditText, Buttons, etc...
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -57,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.buttonCreateAccount).setOnClickListener(this);
+        findViewById(R.id.textViewSignUp).setOnClickListener(this);
         findViewById(R.id.buttonSignIn).setOnClickListener(this);
 
     }
@@ -139,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.buttonCreateAccount:
+            case R.id.textViewSignUp:
                 finish();
                 startActivity(new Intent(this, SignUpActivity.class));
                 break;
