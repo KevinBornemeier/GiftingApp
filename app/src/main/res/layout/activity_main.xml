@@ -63,7 +63,7 @@
             android:id="@+id/checkBoxRememberMe"
             android:layout_width="match_parent"
             android:layout_height="59dp"
-            android:text="Remember Me"
+            android:text="@string/check_remember"
             android:textColor="#FFF"/>
     </LinearLayout>
 

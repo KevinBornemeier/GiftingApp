@@ -1,6 +1,7 @@
 package com.example.giftingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,8 @@ NOTES from 2/28 (KB) :
 *Tutorial series I'm currently looking at to set up the app: https://www.youtube.com/watch?v=mF5MWLsb4cg&list=PLk7v1Z2rk4hi_LdvJ2V5-VvZfyfSdY5hy&t=0s&index=2
 *
 *
-* TODO:  Finished login and create account.  Need to figure out queries,saving user information,etc...
+* TODO:  Finished login and create account. Implement forgot password option - Mike
+*
  */
 
 
@@ -36,7 +38,7 @@ NOTES from 2/28 (KB) :
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //variable declarations
+    //Variable declarations
     String email, password;
     EditText editTextEmail;
     EditText editTextPassword;
@@ -48,11 +50,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ImageView imageViewBackground;
 
+    private CheckBox mCheckBoxRemember;
+    private SharedPreferences mPrefs;
+    private static final String PREFS_EMAIL = "PrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPrefs = getSharedPreferences(PREFS_EMAIL, MODE_PRIVATE);
 
         //initialize zoomed animation on login screen
         imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //initialize EditText, Buttons, etc...
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        mCheckBoxRemember = (CheckBox) findViewById(R.id.checkBoxRememberMe);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -68,13 +76,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.textViewSignUp).setOnClickListener(this);
         findViewById(R.id.buttonSignIn).setOnClickListener(this);
+        findViewById(R.id.checkBoxRememberMe).setOnClickListener(this);
+
+        //Retrieve stored user data.
+        getPreferencesData();
 
     }
 
-    private void userSignIn() {
-        String email = editTextEmail.getText().toString();
-        String password = editTextPassword.getText().toString();
+    //Restore user login from cached data, otherwise display error.
+    private void getPreferencesData() {
+        SharedPreferences sp = getSharedPreferences(PREFS_EMAIL, MODE_PRIVATE);
+        if(sp.contains("pref_email")) {
+            String user = sp.getString("pref_email", "Email not found.");
+            editTextEmail.setText(user.toString());
+        }
+        if(sp.contains("pref_pass")) {
+            String passwd = sp.getString("pref_pass", "Password not found.");
+            editTextPassword.setText(passwd.toString());
+        }
+        if(sp.contains("pref_check")) {
+            Boolean bool = sp.getBoolean("pref_check", false);
+            mCheckBoxRemember.setChecked(bool);
+        }
+    }
 
+    //Validate user login information, if the user is a first time user then store their credentials.
+    private void userSignIn() {
+        final String email = editTextEmail.getText().toString();
+        final String password = editTextPassword.getText().toString();
 
         /*
         Perform login validation checks.
@@ -106,6 +135,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+        //Store the user login information in cache, otherwise clear the data.
+        if(mCheckBoxRemember.isChecked()) {
+            Boolean boolIsChecked = mCheckBoxRemember.isChecked();
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putString("pref_email", email);
+            editor.putString("pref_pass", password);
+            editor.putBoolean("pref_check", boolIsChecked);
+            editor.apply();
+        } else {
+            mPrefs.edit().clear().apply();
+        }
+
         /*
         if we reach this point, both the email and password are valid. -> sign in
          */
@@ -124,13 +165,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //clear all activities on the stack and open a new activity.
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
 
     }
 
@@ -158,8 +199,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
 
     //showToast method: displays text
     private void showToast(String text) {
