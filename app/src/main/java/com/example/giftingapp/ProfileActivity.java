@@ -130,7 +130,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
 
             if(user.isEmailVerified()) {
-                textView.setText("Email Verified.");
             } else {
                 textView.setText("Email Not Verified (Click to Verify)");
                 textView.setOnClickListener(new View.OnClickListener() {
