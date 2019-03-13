@@ -27,13 +27,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editText;
     ImageView imageView;
@@ -41,16 +43,29 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int CHOOSE_IMAGE = 101;
     String profileImageUrl;
     TextView textView;
+    private List<Profile> profileList;
 
     FirebaseAuth mAuth;
 
     Uri uriProfileImage;
 
+    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+//        RelativeLayout relativeLayout = new RelativeLayout(this);
+//        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
+//                RelativeLayout.LayoutParams.MATCH_PARENT,
+//                RelativeLayout.LayoutParams.MATCH_PARENT
+//        );
+//        relativeLayout.setLayoutParams(relativeParams);
+//        setContentView(relativeLayout);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,6 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         textView = (TextView) findViewById(R.id.textViewVerified);
+
+
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +92,12 @@ public class ProfileActivity extends AppCompatActivity {
                 saveUserInformation();
             }
         });
+
+        findViewById(R.id.buttonEditInfo).setOnClickListener(this);
+        findViewById(R.id.buttonEditWishlist).setOnClickListener(this);
+
+
+               
 
 
     }
@@ -268,6 +291,23 @@ public class ProfileActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select profile image."), CHOOSE_IMAGE);
+    }
+
+    //on click method: switches layouts (views) upon clicking a button
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.buttonEditInfo:
+                finish();
+                startActivity(new Intent(this, EditInfoActivity.class));
+                break;
+            case R.id.buttonEditWishlist:
+                finish();
+                startActivity(new Intent(this, EditWishlistActivity.class));
+                break;
+
+        }
+
     }
 
 }

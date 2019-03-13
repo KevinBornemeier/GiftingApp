@@ -53,24 +53,34 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:id="@+id/textViewVerified"
-        android:text="Verified"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Verified"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:paddingLeft="55dp"
-            android:paddingRight="55dp"
-            android:text="Save"
-            android:textAllCaps="false" />
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:text="Save"
+        android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/buttonEditInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Info" />
 
+    <Button
+        android:id="@+id/buttonEditWishlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Wishlist" />
 
 
 </LinearLayout>
