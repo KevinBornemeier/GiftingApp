@@ -13,9 +13,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.giftingapp.ProfileActivity;
-import com.example.giftingapp.R;
-import com.example.giftingapp.SignUpActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,6 +26,12 @@ NOTES from 2/28 (KB) :
 *
 *
 * TODO:  Finished login and create account.  Need to figure out queries,saving user information,etc...
+ */
+
+/*
+3/11 Changes: *changed loadup from profile activity to dashboard activity.
+
+*'add new profile' button set as black arrow as a temp.
  */
 
 
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     finish();
-                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                     //clear all activities on the stack and open a new activity.
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         if(mAuth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent(this, ProfileActivity.class));
+            startActivity(new Intent(this, DashboardActivity.class));
         }
     }
 
