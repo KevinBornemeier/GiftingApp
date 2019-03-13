@@ -23,10 +23,13 @@ import com.google.firebase.auth.FirebaseAuth;
 NOTES from 2/28 (KB) :
 *Link to database: https://console.firebase.google.com/project/gifting-app/overview
 *Tutorial to set up your Android settings to run the app: https://www.youtube.com/watch?time_continue=3&v=cNPCgJW8c-E
-*Tutorial series I'm currently looking at to set up the app: https://www.youtube.com/watch?v=mF5MWLsb4cg&list=PLk7v1Z2rk4hi_LdvJ2V5-VvZfyfSdY5hy&t=0s&index=2
 *
-*
-* TODO:  Finished login and create account. Implement forgot password option - Mike
+* NOTES from 3/13 (KB)
+*Tutorial to set up dependencies with Recycler View: https://www.youtube.com/watch?v=USbTcGx1mD0&list=PLk7v1Z2rk4hjHrGKo9GqOtLs1e2bglHHA&index=1
+* ****Note: in the recycler view tutorial, he only shows how to display dummy data with it.  You have to do a bit more to set it up to dynamically work with the database.
+* TODO:  *Polish UI, slightly Redesign the UI for creating new profiles, allow space for the 'add new profile' button so that it doesnt stack on top of the recycler view.
+* TODO:  *Condense the data in the recycler view so that it only displays picture and name in the dashboard -- Additional details/wishlists should be available on-click.
+* TODO:  *Modify the recycler view so that it displays the actual image, not the imageURL.
 *
  */
 
