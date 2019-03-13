@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +23,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
     private EditText editTextShirtSize;
     private EditText editTextPantsSize;
     private EditText editTextFavoriteColor;
+    private TextView textViewProfileName;
 
     private FirebaseFirestore db;
 
@@ -33,10 +35,18 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
         db = FirebaseFirestore.getInstance();
 
 
+
+
         editTextShoeSize = findViewById(R.id.EditTextEditShoeSize);
         editTextShirtSize = findViewById(R.id.EditTextEditShirtSize);
         editTextPantsSize = findViewById(R.id.EditTextEditPantsSize);
         editTextFavoriteColor = findViewById(R.id.EditTextEditFavoriteColor);
+        textViewProfileName = findViewById(R.id.textViewProfileName);
+
+
+        //set the editText name to display the profile name.
+        String profileName = getIntent().getExtras().getString("profileName");
+        textViewProfileName.setText("Enter " + profileName + "'s Info");
 
 
         findViewById(R.id.imageButtonBackArrow).setOnClickListener(this);
@@ -56,13 +66,17 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.buttonSave:
-                //TODO: name hardcoded to Jon for now.  This should be changed to take input from the profile activity to extract the display name.
-                String name = "Jon";
+
 
                 String shoeSize = editTextShoeSize.getText().toString().trim();
                 String shirtSize = editTextShirtSize.getText().toString().trim();
                 String pantsSize = editTextPantsSize.getText().toString().trim();
                 String favoriteColor = editTextFavoriteColor.getText().toString().trim();
+                //extract extra values from 'profile activity'
+                String profileImageUrl = getIntent().getExtras().getString("profileImageUrl");
+                String profileName = getIntent().getExtras().getString("profileName");
+
+
 
                 //extract UserID
                 FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -75,8 +89,10 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
 
                 //create Profile object with the values extracted from the textViews.
                 Profile profile = new Profile(
-                        userID, name, shoeSize, shirtSize, pantsSize, favoriteColor
+                        userID, profileName, profileImageUrl, shoeSize, shirtSize, pantsSize, favoriteColor
+
                 );
+
 
                 dbProfiles.add(profile)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

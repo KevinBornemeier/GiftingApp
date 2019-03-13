@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     ImageView imageView;
     ProgressBar progressBar;
     private static final int CHOOSE_IMAGE = 101;
-    String profileImageUrl;
+    String profileImageUrl, displayName;
     TextView textView;
     private List<Profile> profileList;
 
@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.buttonEditWishlist).setOnClickListener(this);
 
 
-               
+
 
 
     }
@@ -157,7 +157,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     * This method save the users profile information and stores it in firebase.
     */
     private void saveUserInformation() {
-        String displayName = editText.getText().toString();
+        displayName = editText.getText().toString();
 
         if(displayName.isEmpty()) {
             editText.setError("Name required.");
@@ -298,7 +298,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         switch(view.getId()) {
             case R.id.buttonEditInfo:
                 finish();
-                startActivity(new Intent(this, EditInfoActivity.class));
+
+
+
+                //This Bundle/Intent combo allows us to pass variables from one activity to another (name, profileImageUrl).
+                Intent intent = new Intent(this, EditInfoActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("profileName", displayName);
+                extras.putString("profileImageUrl", profileImageUrl);
+                intent.putExtras(extras);
+
+
+                startActivity(intent);
                 break;
             case R.id.buttonEditWishlist:
                 finish();

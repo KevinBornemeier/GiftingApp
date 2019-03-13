@@ -2,7 +2,7 @@ package com.example.giftingapp;
 
 public class Profile {
 
-    private String name, shoeSize, shirtSize, pantsSize, favoriteColor, userID;
+    private String name, imageUrl, shoeSize, shirtSize, pantsSize, favoriteColor, userID;
 
     //default constructor
     public Profile(){
@@ -10,17 +10,22 @@ public class Profile {
     }
 
     //constructor to initialize all values
-    public Profile(String userID, String name, String shoeSize, String shirtSize, String pantsSize, String favoriteColor) {
+    public Profile(String userID, String name, String imageUrl, String shoeSize, String shirtSize, String pantsSize, String favoriteColor) {
         this.userID = userID;
         this.name = name;
         this.shoeSize = shoeSize;
         this.shirtSize = shirtSize;
         this.pantsSize = pantsSize;
         this.favoriteColor = favoriteColor;
+        this.imageUrl = imageUrl;
     }
 
     public String getUserID() {
         return userID;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getName() {
