@@ -1,6 +1,7 @@
 package com.example.giftingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import java.util.List;
 
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<Profile> profileList;
     private Context context;
@@ -50,7 +51,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         return profileList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView textViewDisplayName;
         public TextView textViewDisplayUserID;
@@ -61,7 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public TextView textViewDisplayFavoriteColor;
 
 
-        public ViewHolder(@NonNull View itemView) {
+         ViewHolder (@NonNull View itemView) {
             super(itemView);
 
             textViewDisplayName = itemView.findViewById(R.id.textViewDisplayName);
@@ -71,6 +74,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             textViewDisplayPantsSize = itemView.findViewById(R.id.textViewDisplayPantsSize);
             textViewDisplayShoeSize = itemView.findViewById(R.id.textViewDisplayShoeSize);
             textViewDisplayFavoriteColor = itemView.findViewById(R.id.textViewDisplayFavoriteColor);
+
+            //set an onClickListener to allow users to click on profiles in the dashboard to update.
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+             Profile profile = profileList.get(getAdapterPosition());
+             Intent intent = new Intent(context,UpdateProfilePictureActivity.class);
+             intent.putExtra("profile", profile);
+             context.startActivity(intent);
+
         }
     }
 

@@ -69,6 +69,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
                                                   for(DocumentSnapshot d : list){
                                                       Profile p = d.toObject(Profile.class);
+                                                      p.setId(d.getId());
                                                       profileList.add(p);
                                                       //now all profiles from firestore are loaded into the profileList.
 

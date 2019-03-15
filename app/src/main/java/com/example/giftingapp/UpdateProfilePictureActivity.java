@@ -35,17 +35,13 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.List;
 
-/*
-This is the activity for account creation. Not for updates
- */
-
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class UpdateProfilePictureActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editText;
     ImageView imageView;
     ProgressBar progressBar;
     private static final int CHOOSE_IMAGE = 101;
-    String profileImageUrl, displayName;
+    String  displayName;
     TextView textView;
     private List<Profile> profileList;
 
@@ -53,7 +49,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     Uri uriProfileImage;
 
+    String name;
+    String imageUrl;
+    String shoeSize;
+    String shirtSize;
+    String pantsSize;
+    String favoriteColor;
+
     private FirebaseFirestore db;
+    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +73,26 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_update_profile_picture);
+
+        //this grabs the profile that is clicked from the dashboard.
+        db = FirebaseFirestore.getInstance();
+        profile = (Profile) getIntent().getSerializableExtra("profile");
+        name = profile.getName();
+        imageUrl = profile.getImageUrl();
+        shoeSize = profile.getShoeSize();
+        shirtSize = profile.getShirtSize();
+        pantsSize = profile.getPantsSize();
+        favoriteColor = profile.getFavoriteColor();
+
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+
+
 
 
 
@@ -88,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
-       // loadUserInformation();
+        loadUserInformation();
 
         findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,27 +143,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (user != null) {
             if (user.getPhotoUrl() != null) {
                 Glide.with(this)
-                        .load(user.getPhotoUrl().toString())
+                        .load(imageUrl)
                         .into(imageView);
             }
             if (user.getDisplayName() != null) {
-                editText.setText(user.getDisplayName());
-            }
-
-            if(user.isEmailVerified()) {
-            } else {
-                textView.setText("Email Not Verified (Click to Verify)");
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(ProfileActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                 });
+                editText.setText(name);
             }
         }
 
@@ -154,37 +155,45 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     /*
-    * TODO Note from Mike
-    * Right now the app will only determine a successful profile creation if the user enters a name
-    * AND uploads a photo.
-    *
-    * This method save the users profile information and stores it in firebase.
-    */
+     * TODO Note from Mike
+     * Right now the app will only determine a successful profile creation if the user enters a name
+     * AND uploads a photo.
+     *
+     * This method save the users profile information and stores it in firebase.
+     */
     private void saveUserInformation() {
-        displayName = editText.getText().toString();
+        //update name to whatever is entered in the text field.
+        name = editText.getText().toString();
 
-        if(displayName.isEmpty()) {
+        if(name.isEmpty()) {
             editText.setError("Name required.");
             editText.requestFocus();
             return;
         }
 
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null && profileImageUrl != null){
+        if(user!=null && imageUrl != null){
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(displayName)
-                    .setPhotoUri(Uri.parse(profileImageUrl))
+                    .setDisplayName(name)
+                    .setPhotoUri(Uri.parse(imageUrl))
                     .build();
             user.updateProfile(profile)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(ProfileActivity.this,"Profile updated.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UpdateProfilePictureActivity.this,"Profile updated.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
         }
+
+        System.out.println(imageUrl);
+        //update name and imageUrl in the 'profile' collection
+        db.collection("profiles").document(profile.getId())
+                .update("name", name, "imageUrl", imageUrl);
+
+
     }
 
 
@@ -212,6 +221,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void uploadImageToFireBaseStorage() {
         progressBar.setVisibility(View.VISIBLE);
+
         //storage reference
         final StorageReference profileImageRef = FirebaseStorage.getInstance().getReference("profilepics/"+System.currentTimeMillis() + ".jpg");
 
@@ -221,13 +231,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressBar.setVisibility(View.GONE);
+
 
 
                             profileImageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    profileImageUrl = uri.toString();
+                                    imageUrl = uri.toString();
+
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getApplicationContext(), "Image Upload Successful", Toast.LENGTH_SHORT).show();
                                 }
                             })
@@ -307,10 +319,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 //This Bundle/Intent combo allows us to pass variables from one activity to another (name, profileImageUrl).
-                Intent intent = new Intent(this, EditInfoActivity.class);
+                Intent intent = new Intent(this, UpdateProfileInfoActivity.class);
                 Bundle extras = new Bundle();
-                extras.putString("profileName", displayName);
-                extras.putString("profileImageUrl", profileImageUrl);
+                extras.putString("profileName", name);
+                extras.putString("imageUrl", imageUrl);
+                extras.putString("shoeSize", shoeSize);
+                extras.putString("shirtSize", shirtSize);
+                extras.putString("pantsSize", pantsSize);
+                extras.putString("favoriteColor", favoriteColor);
                 intent.putExtras(extras);
 
 
@@ -318,7 +334,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.buttonEditWishlist:
                 finish();
-                startActivity(new Intent(this, EditWishlistActivity.class));
+                startActivity(new Intent(this, UpdateProfileWishlistActivity.class));
                 break;
 
         }

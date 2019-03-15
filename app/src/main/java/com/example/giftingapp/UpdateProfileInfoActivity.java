@@ -18,11 +18,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-/*
-This is the activity for account creation. Not for updates
- */
 
-public class EditInfoActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class UpdateProfileInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextShoeSize;
     private EditText editTextShirtSize;
@@ -103,13 +101,13 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(EditInfoActivity.this, "Profile added", Toast.LENGTH_LONG).show();
+                                Toast.makeText(UpdateProfileInfoActivity.this, "Profile added", Toast.LENGTH_LONG).show();
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditInfoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(UpdateProfileInfoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
                     }
                 });

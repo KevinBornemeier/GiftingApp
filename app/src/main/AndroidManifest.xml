@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditWishlistActivity"></activity>
+        <activity android:name=".UpdateProfileWishlistActivity"></activity>
+        <activity android:name=".UpdateProfileInfoActivity" />
+        <activity android:name=".UpdateProfilePictureActivity" />
+        <activity android:name=".EditWishlistActivity" />
         <activity android:name=".EditInfoActivity" />
         <activity android:name=".DashboardActivity" />
         <activity

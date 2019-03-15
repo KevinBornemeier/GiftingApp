@@ -6,10 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 
-/*
-This is the activity for account creation. Not for updates
- */
-public class EditWishlistActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class UpdateProfileWishlistActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

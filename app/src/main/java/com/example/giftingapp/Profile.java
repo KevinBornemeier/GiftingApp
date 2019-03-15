@@ -1,6 +1,12 @@
 package com.example.giftingapp;
 
-public class Profile {
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
+
+public class Profile implements Serializable {
+
+    @Exclude private String id;
 
     private String name, imageUrl, shoeSize, shirtSize, pantsSize, favoriteColor, userID;
 
@@ -18,6 +24,14 @@ public class Profile {
         this.pantsSize = pantsSize;
         this.favoriteColor = favoriteColor;
         this.imageUrl = imageUrl;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getUserID() {
