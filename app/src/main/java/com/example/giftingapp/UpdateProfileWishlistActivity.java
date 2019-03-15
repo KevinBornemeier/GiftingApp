@@ -12,7 +12,7 @@ public class UpdateProfileWishlistActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_wishlist);
+        setContentView(R.layout.activity_create_new_profile_wishlist);
 
         findViewById(R.id.imageButtonBackArrow).setOnClickListener(this);
     }
@@ -25,7 +25,7 @@ public class UpdateProfileWishlistActivity extends AppCompatActivity implements 
         switch(view.getId()) {
             case R.id.imageButtonBackArrow:
                 finish();
-                startActivity(new Intent(this, ProfileActivity.class));
+                startActivity(new Intent(this, CreateNewProfilePictureActivity.class));
                 break;
 
         }

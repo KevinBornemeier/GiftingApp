@@ -12,11 +12,11 @@
         <activity android:name=".UpdateProfileWishlistActivity"></activity>
         <activity android:name=".UpdateProfileInfoActivity" />
         <activity android:name=".UpdateProfilePictureActivity" />
-        <activity android:name=".EditWishlistActivity" />
-        <activity android:name=".EditInfoActivity" />
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".CreateNewProfileWishlistActivity" />
+        <activity android:name=".CreateNewProfileInfoActivity" />
+        <activity android:name=".AdminDashboardActivity" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".CreateNewProfilePictureActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

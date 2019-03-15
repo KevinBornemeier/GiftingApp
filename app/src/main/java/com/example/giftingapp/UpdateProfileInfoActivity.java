@@ -33,7 +33,7 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_info);
+        setContentView(R.layout.activity_create_new_profile_info);
 
         db = FirebaseFirestore.getInstance();
 
@@ -65,7 +65,7 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
         switch(view.getId()) {
             case R.id.imageButtonBackArrow:
                 finish();
-                startActivity(new Intent(this, ProfileActivity.class));
+                startActivity(new Intent(this, CreateNewProfilePictureActivity.class));
                 break;
 
             case R.id.buttonSave:

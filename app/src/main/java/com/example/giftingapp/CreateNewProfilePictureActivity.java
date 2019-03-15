@@ -39,7 +39,7 @@ import java.util.List;
 This is the activity for account creation. Not for updates
  */
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateNewProfilePictureActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editText;
     ImageView imageView;
@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_create_new_profile_picture);
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -142,7 +142,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(ProfileActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreateNewProfilePictureActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -180,7 +180,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(ProfileActivity.this,"Profile updated.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreateNewProfilePictureActivity.this,"Profile updated.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -260,7 +260,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 //                @Override
 //                public void onFailure(@NonNull Exception e) {
 //                    progressBar.setVisibility(View.GONE);
-//                    Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CreateNewProfilePictureActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 //                }
 //            });
         }
@@ -307,7 +307,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 //This Bundle/Intent combo allows us to pass variables from one activity to another (name, profileImageUrl).
-                Intent intent = new Intent(this, EditInfoActivity.class);
+                Intent intent = new Intent(this, CreateNewProfileInfoActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("profileName", displayName);
                 extras.putString("profileImageUrl", profileImageUrl);
@@ -318,7 +318,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.buttonEditWishlist:
                 finish();
-                startActivity(new Intent(this, EditWishlistActivity.class));
+                startActivity(new Intent(this, CreateNewProfileWishlistActivity.class));
                 break;
 
         }

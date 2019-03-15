@@ -27,9 +27,15 @@ NOTES from 2/28 (KB) :
 * NOTES from 3/13 (KB)
 *Tutorial to set up dependencies with Recycler View: https://www.youtube.com/watch?v=USbTcGx1mD0&list=PLk7v1Z2rk4hjHrGKo9GqOtLs1e2bglHHA&index=1
 * ****Note: in the recycler view tutorial, he only shows how to display dummy data with it.  You have to do a bit more to set it up to dynamically work with the database.
-* TODO:  *Polish UI, slightly Redesign the UI for creating new profiles, allow space for the 'add new profile' button so that it doesnt stack on top of the recycler view.
-* TODO:  *Condense the data in the recycler view so that it only displays picture and name in the dashboard -- Additional details/wishlists should be available on-click.
-* TODO:  *Modify the recycler view so that it displays the actual image, not the imageURL.
+* TODO:  *Polish UI
+* TODO:  (in the dashboard activity) allow space for the 'add new profile' button so that it doesnt stack on top of the recycler view in the dashboard activity. Also add a 'logout' button next to the 'add new profile' button.
+* ---------For this, just swap the logout function to be performed upon clicking the logout button and remove the hidden drop-down menu from the 'updateProfilePicture' activity
+* ---------and the 'createNewProfilePicture' activity.
+* TODO (KB):  *Condense the data in the recycler view so that it only displays picture and name in the dashboard -- Additional details/wishlists should be available on-click.
+* TODO (KB):  *Modify the recycler view so that it displays the actual image, not the imageURL.
+* TODO (KB):  *Finish implementing the CreateNewProfile activities.
+* TODO: Implement the Wishlist Activity to display wishlist collections with a Recycler view.  From there, the user should be able to click on each wishlist object to
+* ------access info such as: picture of item, price, URL.
 *
  */
 
@@ -167,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     finish();
-                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                    Intent intent = new Intent(MainActivity.this, AdminDashboardActivity.class);
                     //clear all activities on the stack and open a new activity.
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -187,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         if(mAuth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent(this, DashboardActivity.class));
+            startActivity(new Intent(this, AdminDashboardActivity.class));
         }
     }
 

@@ -19,7 +19,7 @@ import java.util.List;
 TODO: 1)change the add button to a 'plus' picture. 2)work with views and extract data from one to another. 3)dynamically add profiles with extracted data.
  */
 
-public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -31,7 +31,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_admin_dashboard);
 
         findViewById(R.id.imageButtonAddProfile).setOnClickListener(this);
         findViewById(R.id.buttonAddNewProfile).setOnClickListener(this);
@@ -97,7 +97,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.buttonAddNewProfile:
                 finish();
-                startActivity(new Intent(this, ProfileActivity.class));
+                startActivity(new Intent(this, CreateNewProfilePictureActivity.class));
                 break;
 
         }

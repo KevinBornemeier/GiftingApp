@@ -272,7 +272,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
 //                @Override
 //                public void onFailure(@NonNull Exception e) {
 //                    progressBar.setVisibility(View.GONE);
-//                    Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CreateNewProfilePictureActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 //                }
 //            });
         }

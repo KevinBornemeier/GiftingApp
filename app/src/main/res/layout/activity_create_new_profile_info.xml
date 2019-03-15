@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditWishlistActivity">
+    tools:context=".CreateNewProfileInfoActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="489dp"
-        android:layout_height="200dp"
+        android:layout_height="139dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
-            android:layout_width="336dp"
+            android:layout_width="414dp"
             android:layout_height="231dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="&quot;Profile Name&quot;s'              Wishlist"
+                android:text="  &quot;Profile Name&quot;s' Info"
                 android:textSize="36sp" />
         </LinearLayout>
 
@@ -51,49 +51,43 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="382dp"
-        android:layout_height="513dp"
+        android:layout_width="328dp"
+        android:layout_height="442dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <EditText
-            android:id="@+id/EditTextEditItem1"
+            android:id="@+id/EditTextEditShirtSize"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:hint="Edit Item1" />
+            android:hint="Edit Shirt Size" />
 
         <EditText
-            android:id="@+id/EditTextEditItem2"
+            android:id="@+id/EditTextEditPantsSize"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:hint="Edit Item2" />
+            android:hint="Edit Pants Size" />
 
         <EditText
-            android:id="@+id/EditTextEditItem3"
+            android:id="@+id/EditTextEditShoeSize"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:hint="Edit Item3" />
+            android:hint="Edit Shoe Size" />
 
         <EditText
-            android:id="@+id/EditTextEditItem4"
+            android:id="@+id/EditTextEditFavoriteColor"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:hint="Edit Item4" />
-
-        <EditText
-            android:id="@+id/EditTextEditItem5"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:hint="Edit Item5" />
+            android:hint="Edit Favorite Color" />
 
         <Button
             android:id="@+id/buttonSave"

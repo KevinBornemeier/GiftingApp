@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 This is the activity for account creation. Not for updates
  */
 
-public class EditInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateNewProfileInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextShoeSize;
     private EditText editTextShirtSize;
@@ -35,7 +35,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_info);
+        setContentView(R.layout.activity_create_new_profile_info);
 
         db = FirebaseFirestore.getInstance();
 
@@ -67,7 +67,7 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
         switch(view.getId()) {
             case R.id.imageButtonBackArrow:
                 finish();
-                startActivity(new Intent(this, ProfileActivity.class));
+                startActivity(new Intent(this, CreateNewProfilePictureActivity.class));
                 break;
 
             case R.id.buttonSave:
@@ -103,13 +103,13 @@ public class EditInfoActivity extends AppCompatActivity implements View.OnClickL
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(EditInfoActivity.this, "Profile added", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CreateNewProfileInfoActivity.this, "Profile added", Toast.LENGTH_LONG).show();
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditInfoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateNewProfileInfoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
                     }
                 });

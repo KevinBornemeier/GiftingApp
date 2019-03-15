@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(task.isSuccessful()) {
                     finish();
                     Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignUpActivity.this, ProfileActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, CreateNewProfilePictureActivity.class));
                 }
                 else{
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
