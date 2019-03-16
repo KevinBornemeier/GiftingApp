@@ -30,6 +30,34 @@ public class Profile implements Serializable {
         this.id = id;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setShoeSize(String shoeSize) {
+        this.shoeSize = shoeSize;
+    }
+
+    public void setShirtSize(String shirtSize) {
+        this.shirtSize = shirtSize;
+    }
+
+    public void setPantsSize(String pantsSize) {
+        this.pantsSize = pantsSize;
+    }
+
+    public void setFavoriteColor(String favoriteColor) {
+        this.favoriteColor = favoriteColor;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
     public String getId() {
         return id;
     }

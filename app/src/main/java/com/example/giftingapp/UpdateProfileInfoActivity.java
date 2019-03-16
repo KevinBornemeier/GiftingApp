@@ -1,21 +1,13 @@
 
 package com.example.giftingapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -28,14 +20,21 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
     private EditText editTextFavoriteColor;
     private TextView textViewProfileName;
 
+
+
+    private Profile profile;
+
     private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_profile_info);
+        setContentView(R.layout.activity_update_profile_info);
 
         db = FirebaseFirestore.getInstance();
+
+        profile = (Profile) getIntent().getSerializableExtra("profile");
+
 
 
 
@@ -49,7 +48,13 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
 
         //set the editText name to display the profile name.
         String profileName = getIntent().getExtras().getString("profileName");
-        textViewProfileName.setText("Enter " + profileName + "'s Info");
+        textViewProfileName.setText(profile.getName() + "'s Info");
+        //autofill the rest of the data with what is currently in the database.
+        editTextShirtSize.setText(profile.getShirtSize());
+        editTextPantsSize.setText(profile.getPantsSize());
+        editTextShoeSize.setText(profile.getShoeSize());
+        editTextFavoriteColor.setText(profile.getFavoriteColor());
+
 
 
         findViewById(R.id.imageButtonBackArrow).setOnClickListener(this);
@@ -64,53 +69,29 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.imageButtonBackArrow:
-                finish();
-                startActivity(new Intent(this, CreateNewProfilePictureActivity.class));
+                this.finish();
                 break;
 
             case R.id.buttonSave:
 
 
-                String shoeSize = editTextShoeSize.getText().toString().trim();
-                String shirtSize = editTextShirtSize.getText().toString().trim();
-                String pantsSize = editTextPantsSize.getText().toString().trim();
-                String favoriteColor = editTextFavoriteColor.getText().toString().trim();
-                //extract extra values from 'profile activity'
-                String profileImageUrl = getIntent().getExtras().getString("profileImageUrl");
-                String profileName = getIntent().getExtras().getString("profileName");
+                //upon save, we update the profile with whatever is currently inside the editText fields.
+                profile.setShoeSize(editTextShoeSize.getText().toString().trim());
+                profile.setShirtSize(editTextShirtSize.getText().toString().trim());
+                profile.setPantsSize(editTextPantsSize.getText().toString().trim());
+                profile.setFavoriteColor(editTextFavoriteColor.getText().toString().trim());
+
+                //update name and imageUrl in the 'profile' collection
+                db.collection("profiles").document(profile.getId())
+                        .update("shoeSize", profile.getShoeSize(), "shirtSize", profile.getShirtSize(),
+                                "pantsSize", profile.getPantsSize(), "favoriteColor", profile.getFavoriteColor()
+                        );
+                Toast.makeText(this,"Info updated.", Toast.LENGTH_SHORT).show();
 
 
 
-                //extract UserID
-                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                String userID = currentFirebaseUser.getUid();
 
 
-                //TODO: add an if input is validated statement to validate input before adding to collections.
-                //collectionreference parameter specifies the collection name that all the fields will be stored in.
-                CollectionReference dbProfiles = db.collection("profiles");
-
-                //create Profile object with the values extracted from the textViews.
-                Profile profile = new Profile(
-                        userID, profileName, profileImageUrl, shoeSize, shirtSize, pantsSize, favoriteColor
-
-                );
-
-
-                dbProfiles.add(profile)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(UpdateProfileInfoActivity.this, "Profile added", Toast.LENGTH_LONG).show();
-
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UpdateProfileInfoActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
-                    }
-                });
 
                 break;
 

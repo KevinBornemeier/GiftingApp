@@ -15,9 +15,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-TODO: 1)change the add button to a 'plus' picture. 2)work with views and extract data from one to another. 3)dynamically add profiles with extracted data.
- */
+
+
 
 public class AdminDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,7 +32,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
 
-        findViewById(R.id.imageButtonAddProfile).setOnClickListener(this);
         findViewById(R.id.buttonAddNewProfile).setOnClickListener(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

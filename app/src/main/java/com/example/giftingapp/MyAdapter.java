@@ -7,7 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -35,13 +38,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Profile profile = profileList.get(position);
 
+        //load imageURL into the imageView
+        Glide.with(context).load(profile.getImageUrl()).into(holder.imageView);
+
+        //set the displayName for each Profile within the dashboard.
         holder.textViewDisplayName.setText(profile.getName());
-        holder.textViewDisplayUserID.setText("UserID: " + profile.getUserID());
-        holder.textViewDisplayImageUrl.setText("ImageUrl: " + profile.getImageUrl());
-        holder.textViewDisplayShirtSize.setText("Shirt size: " + profile.getShirtSize());
-        holder.textViewDisplayPantsSize.setText("Pants size: " + profile.getPantsSize());
-        holder.textViewDisplayShoeSize.setText("Shoe size: " + profile.getShoeSize());
-        holder.textViewDisplayFavoriteColor.setText("Favorite color: " + profile.getFavoriteColor());
+
 
 
     }
@@ -56,24 +58,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView textViewDisplayName;
-        public TextView textViewDisplayUserID;
-        public TextView textViewDisplayImageUrl;
-        public TextView textViewDisplayShirtSize;
-        public TextView textViewDisplayPantsSize;
-        public TextView textViewDisplayShoeSize;
-        public TextView textViewDisplayFavoriteColor;
+        public ImageView imageView;
+
 
 
          ViewHolder (@NonNull View itemView) {
             super(itemView);
 
             textViewDisplayName = itemView.findViewById(R.id.textViewDisplayName);
-            textViewDisplayUserID = itemView.findViewById(R.id.textViewDisplayUserID);
-            textViewDisplayImageUrl = itemView.findViewById(R.id.textViewDisplayImageUrl);
-            textViewDisplayShirtSize = itemView.findViewById(R.id.textViewDisplayShirtSize);
-            textViewDisplayPantsSize = itemView.findViewById(R.id.textViewDisplayPantsSize);
-            textViewDisplayShoeSize = itemView.findViewById(R.id.textViewDisplayShoeSize);
-            textViewDisplayFavoriteColor = itemView.findViewById(R.id.textViewDisplayFavoriteColor);
+            imageView = itemView.findViewById(R.id.imageView);
 
             //set an onClickListener to allow users to click on profiles in the dashboard to update.
             itemView.setOnClickListener(this);

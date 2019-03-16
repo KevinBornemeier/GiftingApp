@@ -188,7 +188,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
                     });
         }
 
-        System.out.println(imageUrl);
+
         //update name and imageUrl in the 'profile' collection
         db.collection("profiles").document(profile.getId())
                 .update("name", name, "imageUrl", imageUrl);
@@ -314,27 +314,16 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.buttonEditInfo:
-                finish();
-
-
-
-                //This Bundle/Intent combo allows us to pass variables from one activity to another (name, profileImageUrl).
-                Intent intent = new Intent(this, UpdateProfileInfoActivity.class);
-                Bundle extras = new Bundle();
-                extras.putString("profileName", name);
-                extras.putString("imageUrl", imageUrl);
-                extras.putString("shoeSize", shoeSize);
-                extras.putString("shirtSize", shirtSize);
-                extras.putString("pantsSize", pantsSize);
-                extras.putString("favoriteColor", favoriteColor);
-                intent.putExtras(extras);
-
-
+                Intent intent = new Intent(this,UpdateProfileInfoActivity.class);
+                intent.putExtra("profile", profile);
                 startActivity(intent);
                 break;
             case R.id.buttonEditWishlist:
-                finish();
-                startActivity(new Intent(this, UpdateProfileWishlistActivity.class));
+                //finish();
+
+                intent = new Intent(this, UpdateProfileWishlistActivity.class);
+                intent.putExtra("profile", profile);
+                startActivity(intent);
                 break;
 
         }

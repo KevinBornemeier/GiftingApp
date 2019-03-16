@@ -39,11 +39,7 @@ NOTES from 2/28 (KB) :
 *
  */
 
-/*
-3/11 Changes: *changed loadup from profile activity to dashboard activity.
 
-*'add new profile' button set as black arrow as a temp.
- */
 
 
 
