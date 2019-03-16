@@ -28,8 +28,9 @@
                 android:id="@+id/textViewDisplayName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nokia X6"
+                android:text="null"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="90sp"
                 android:textStyle="bold" />
 
             
