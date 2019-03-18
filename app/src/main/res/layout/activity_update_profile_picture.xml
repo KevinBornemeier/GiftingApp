@@ -10,11 +10,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorAccent" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Tap on image to change profile picture"
         android:textAlignment="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
@@ -48,6 +49,7 @@
         android:id="@+id/editTextDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="Enter Display Name"
         android:ems="10"
         android:inputType="textPersonName" />
@@ -55,26 +57,51 @@
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="Update Name and Picture"
-        android:textAllCaps="false" />
+        android:textColor="#FFF"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:textSize="16dp"/>
 
     <Button
         android:id="@+id/buttonEditInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Info" />
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="12dp"
+        android:text="Edit Info"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:textSize="16dp"
+        android:textColor="#FFF"/>
 
     <Button
         android:id="@+id/buttonEditWishlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Wishlist" />
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="12dp"
+        android:text="Edit Wishlist"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:textSize="16dp"
+        android:textColor="#FFF"/>
 
 
 </LinearLayout>

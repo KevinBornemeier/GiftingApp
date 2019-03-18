@@ -10,11 +10,12 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorAccent" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Tap on camera to choose profile picture"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
@@ -54,26 +55,51 @@
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
-        android:text="Save"
-        android:textAllCaps="false" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Save Name and Picture"
+        android:textColor="#FFF"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:textSize="16dp" />
 
     <Button
         android:id="@+id/buttonEditInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Info" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Add Info"
+        android:textColor="#FFF"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:textSize="16dp"/>
 
     <Button
         android:id="@+id/buttonEditWishlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Wishlist" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Add Wishlist"
+        android:textColor="#FFF"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:textSize="16dp"/>
 
 
 </LinearLayout>

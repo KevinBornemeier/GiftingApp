@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mPrefs = getSharedPreferences(PREFS_EMAIL, MODE_PRIVATE);
 
-        //initialize zoomed animation on login screen
-        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
-        imageViewBackground.animate().scaleX(2).scaleY(2).setDuration(3000).start();
+//        //initialize zoomed animation on login screen
+//        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
+//        imageViewBackground.animate().scaleX(2).scaleY(2).setDuration(3000).start();
 
         //initialize EditText, Buttons, etc...
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
