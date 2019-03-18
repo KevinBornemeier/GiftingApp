@@ -95,7 +95,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
 
             case R.id.buttonAddNewProfile:
                 finish();
-                startActivity(new Intent(this, CreateNewProfilePictureActivity.class));
+                startActivity(new Intent(this, CreateNewProfileActivity.class));
                 break;
 
         }

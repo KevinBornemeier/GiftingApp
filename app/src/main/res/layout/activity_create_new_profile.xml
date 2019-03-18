@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".CreateNewProfilePictureActivity">
+        tools:context=".CreateNewProfileActivity">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -48,7 +48,7 @@
         android:id="@+id/editTextDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Display Name"
+        android:hint="Enter Name"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -60,20 +60,8 @@
         android:layout_marginTop="25dp"
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
-        android:text="Save"
+        android:text="Create Profile"
         android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/buttonEditInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Edit Info" />
-
-    <Button
-        android:id="@+id/buttonEditWishlist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Edit Wishlist" />
 
 
 </LinearLayout>
