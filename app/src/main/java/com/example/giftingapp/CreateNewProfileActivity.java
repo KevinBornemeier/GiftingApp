@@ -189,6 +189,10 @@ public class CreateNewProfileActivity extends AppCompatActivity {
                         }
                     });
         }
+        /*
+        After newProfile is created, exit the activity and launch the dashboard.
+        */
+        startActivity(new Intent(this, AdminDashboardActivity.class));
     }
 
 

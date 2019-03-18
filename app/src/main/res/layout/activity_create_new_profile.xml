@@ -63,43 +63,11 @@
         android:paddingRight="55dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="Save Name and Picture"
+        android:text="Create Profile"
         android:textColor="#FFF"
         android:background="@drawable/bgbtn"
         android:fontFamily="@font/gotham_bold"
         android:textSize="16dp" />
-
-    <Button
-        android:id="@+id/buttonEditInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="12dp"
-        android:paddingLeft="55dp"
-        android:paddingRight="55dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:text="Add Info"
-        android:textColor="#FFF"
-        android:background="@drawable/bgbtn"
-        android:fontFamily="@font/gotham_bold"
-        android:textSize="16dp"/>
-
-    <Button
-        android:id="@+id/buttonEditWishlist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="12dp"
-        android:paddingLeft="55dp"
-        android:paddingRight="55dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:text="Add Wishlist"
-        android:textColor="#FFF"
-        android:background="@drawable/bgbtn"
-        android:fontFamily="@font/gotham_bold"
-        android:textSize="16dp"/>
 
 
 </LinearLayout>
