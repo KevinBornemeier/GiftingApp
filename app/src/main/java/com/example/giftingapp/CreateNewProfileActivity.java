@@ -19,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +26,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -39,7 +40,7 @@ import java.util.List;
 This is the activity for account creation. Not for updates
  */
 
-public class CreateNewProfilePictureActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateNewProfileActivity extends AppCompatActivity {
 
     EditText editText;
     ImageView imageView;
@@ -52,6 +53,7 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
     FirebaseAuth mAuth;
 
     Uri uriProfileImage;
+
 
     private FirebaseFirestore db;
 
@@ -69,13 +71,15 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_profile_picture);
+        setContentView(R.layout.activity_create_new_profile);
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
+
+        db = FirebaseFirestore.getInstance();
 
 
 
@@ -97,8 +101,7 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
             }
         });
 
-        findViewById(R.id.buttonEditInfo).setOnClickListener(this);
-        findViewById(R.id.buttonEditWishlist).setOnClickListener(this);
+
 
 
 
@@ -120,38 +123,7 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
     // Pull user information from the database including username, profile picture, and status of email verification.
     // TODO: Implement password recovery and email changing options for users.
 
-    private void loadUserInformation() {
-        final FirebaseUser user = mAuth.getCurrentUser();
 
-        if (user != null) {
-            if (user.getPhotoUrl() != null) {
-                Glide.with(this)
-                        .load(user.getPhotoUrl().toString())
-                        .into(imageView);
-            }
-            if (user.getDisplayName() != null) {
-                editText.setText(user.getDisplayName());
-            }
-
-            if(user.isEmailVerified()) {
-            } else {
-                textView.setText("Email Not Verified (Click to Verify)");
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(CreateNewProfilePictureActivity.this, "Verification Email Sent", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                 });
-            }
-        }
-
-
-    }
 
     /*
     * TODO Note from Mike
@@ -169,7 +141,7 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
             return;
         }
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        final FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null && profileImageUrl != null){
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
                     .setDisplayName(displayName)
@@ -180,7 +152,39 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
-                                Toast.makeText(CreateNewProfilePictureActivity.this,"Profile updated.", Toast.LENGTH_SHORT).show();
+                                /*
+                                At this point, the user has successfully uploaded a photo and entered a profile name.
+                                The rest of the information (Wishlist and Info) is an empty string.
+                                The account will be created -- the user will need to tap on the profile in the dashboard
+                                to edit each profile's Wishlist and Info.
+                                 */
+                                //fill in profile data.
+                                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                assert currentFirebaseUser != null;
+                                String userID = currentFirebaseUser.getUid();
+
+                                Profile newProfile = new Profile(userID, displayName, profileImageUrl, "", "", "", "");
+
+
+                                //upload newProfile to database.
+                                //TODO: add an if input is validated statement to validate input before adding to collections.
+                                //collectionreference parameter specifies the collection name that all the fields will be stored in.
+                                CollectionReference dbProfiles = db.collection("profiles");
+
+                                dbProfiles.add(newProfile)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Toast.makeText(CreateNewProfileActivity.this, "Profile added", Toast.LENGTH_LONG).show();
+
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(CreateNewProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+                                    }
+                                });
                             }
                         }
                     });
@@ -260,7 +264,7 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
 //                @Override
 //                public void onFailure(@NonNull Exception e) {
 //                    progressBar.setVisibility(View.GONE);
-//                    Toast.makeText(CreateNewProfilePictureActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CreateNewProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 //                }
 //            });
         }
@@ -297,32 +301,6 @@ public class CreateNewProfilePictureActivity extends AppCompatActivity implement
         startActivityForResult(Intent.createChooser(intent,"Select profile image."), CHOOSE_IMAGE);
     }
 
-    //on click method: switches layouts (views) upon clicking a button
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.buttonEditInfo:
-                finish();
 
-
-
-                //This Bundle/Intent combo allows us to pass variables from one activity to another (name, profileImageUrl).
-                Intent intent = new Intent(this, CreateNewProfileInfoActivity.class);
-                Bundle extras = new Bundle();
-                extras.putString("profileName", displayName);
-                extras.putString("profileImageUrl", profileImageUrl);
-                intent.putExtras(extras);
-
-
-                startActivity(intent);
-                break;
-            case R.id.buttonEditWishlist:
-                finish();
-                startActivity(new Intent(this, CreateNewProfileWishlistActivity.class));
-                break;
-
-        }
-
-    }
 
 }
