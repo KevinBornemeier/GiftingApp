@@ -176,6 +176,12 @@ public class CreateNewProfileActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(DocumentReference documentReference) {
                                                 Toast.makeText(CreateNewProfileActivity.this, "Profile added", Toast.LENGTH_LONG).show();
+                                                /*
+                                                After newProfile is created, exit the activity and launch the dashboard.
+                                                */
+                                                finish();
+                                                startActivity(new Intent(CreateNewProfileActivity.this, AdminDashboardActivity.class));
+
 
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
@@ -192,7 +198,7 @@ public class CreateNewProfileActivity extends AppCompatActivity {
         /*
         After newProfile is created, exit the activity and launch the dashboard.
         */
-        startActivity(new Intent(this, AdminDashboardActivity.class));
+        //startActivity(new Intent(this, AdminDashboardActivity.class));
     }
 
 

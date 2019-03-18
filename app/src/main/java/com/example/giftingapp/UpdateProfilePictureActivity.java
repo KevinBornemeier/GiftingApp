@@ -1,5 +1,6 @@
 package com.example.giftingapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -116,6 +118,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
 
         findViewById(R.id.buttonEditInfo).setOnClickListener(this);
         findViewById(R.id.buttonEditWishlist).setOnClickListener(this);
+        findViewById(R.id.buttonDeleteProfile).setOnClickListener(this);
 
 
 
@@ -309,6 +312,22 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
         startActivityForResult(Intent.createChooser(intent,"Select profile image."), CHOOSE_IMAGE);
     }
 
+
+    private void deleteProfile(){
+        db.collection("profiles").document(profile.getId()).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(UpdateProfilePictureActivity.this,"Profile deleted.", Toast.LENGTH_LONG).show();
+                            finish();
+                            startActivity(new Intent(UpdateProfilePictureActivity.this, AdminDashboardActivity.class));
+                        }
+                    }
+                });
+
+    }
+
     //on click method: switches layouts (views) upon clicking a button
     @Override
     public void onClick(View view) {
@@ -321,9 +340,40 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
             case R.id.buttonEditWishlist:
                 //finish();
 
-                intent = new Intent(this, UpdateProfileWishlistActivity.class);
-                intent.putExtra("profile", profile);
-                startActivity(intent);
+                Intent intentWishlist = new Intent(this, UpdateProfileWishlistActivity.class);
+                intentWishlist.putExtra("profile", profile);
+                startActivity(intentWishlist);
+                break;
+
+            case R.id.buttonDeleteProfile:
+
+                /*
+                Deletion process -- create 'alert dialogue' to ask the user to confirm the profile deletion.
+                 */
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Are you sure you want to delete this profile?");
+                builder.setMessage("After deletion, this profile can not be recovered.");
+
+                //if "Yes", confirm the delete.
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteProfile();
+                    }
+                });
+
+                //if "No", cancel the delete.
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing. No deletion.
+                    }
+                });
+
+                //make the alert visable to the user.
+                AlertDialog ad = builder.create();
+                ad.show();
+
                 break;
 
         }
