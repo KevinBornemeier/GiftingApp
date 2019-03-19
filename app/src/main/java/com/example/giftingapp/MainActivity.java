@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String email, password;
     EditText editTextEmail;
     EditText editTextPassword;
+    TextView forgotPassword;
     Button buttonSignIn;
     Button buttonCreateAccount;
     CheckBox checkBoxRememberMe;
@@ -77,11 +79,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         mCheckBoxRemember = (CheckBox) findViewById(R.id.checkBoxRememberMe);
+        forgotPassword = (TextView) findViewById(R.id.textViewForgotPassword);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
 
+        findViewById(R.id.textViewForgotPassword).setOnClickListener(this);
         findViewById(R.id.textViewSignUp).setOnClickListener(this);
         findViewById(R.id.buttonSignIn).setOnClickListener(this);
         findViewById(R.id.checkBoxRememberMe).setOnClickListener(this);
@@ -181,6 +185,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
     }
 
     //Check to see if the user is currently logged in.
@@ -203,6 +214,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.buttonSignIn:
                 userSignIn();
+                break;
+            case R.id.textViewForgotPassword:
+                finish();
+                startActivity(new Intent(this, ForgotPasswordActivity.class));
+                break;
 
         }
 

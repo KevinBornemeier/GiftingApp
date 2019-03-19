@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateProfileWishlistActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".UpdateProfileWishlistActivity" />
         <activity android:name=".UpdateProfileInfoActivity" />
         <activity android:name=".UpdateProfilePictureActivity" />
         <activity android:name=".AdminDashboardActivity" />
