@@ -101,6 +101,12 @@
             android:layout_height="38dp"
             android:text="Save" />
 
+        <Button
+            android:id="@+id/scraperLinkButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go To Scraper Test" />
+
     </LinearLayout>
 
 

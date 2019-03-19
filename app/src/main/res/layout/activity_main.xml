@@ -21,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="410dp"
         android:orientation="vertical">
 
         <EditText
@@ -53,6 +53,7 @@
             android:textSize="19dp" />
 
         <CheckBox
+            android:visibility="gone"
             android:id="@+id/checkBoxRememberMe"
             android:layout_width="325dp"
             android:layout_height="wrap_content"
@@ -79,6 +80,7 @@
             android:layout_width="165dp"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/bgbtn"
             android:fontFamily="@font/gotham_bold"
             android:text="Login"
@@ -104,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/gotham_book"
             android:text="Forgot Password?"
             android:textAlignment="center"

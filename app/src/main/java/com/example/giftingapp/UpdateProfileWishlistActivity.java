@@ -1,8 +1,10 @@
 package com.example.giftingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -13,6 +15,7 @@ public class UpdateProfileWishlistActivity extends AppCompatActivity implements 
     private TextView textViewProfileName;
     private Profile profile;
     private FirebaseFirestore db;
+    private Button scraperLinkButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class UpdateProfileWishlistActivity extends AppCompatActivity implements 
 
         textViewProfileName.setText(profile.getName() + "'s Wishlist");
 
+        scraperLinkButton = findViewById(R.id.scraperLinkButton);
+        scraperLinkButton.setOnClickListener(this);
+
         findViewById(R.id.imageButtonBackArrow).setOnClickListener(this);
     }
 
@@ -37,6 +43,10 @@ public class UpdateProfileWishlistActivity extends AppCompatActivity implements 
         switch(view.getId()) {
             case R.id.imageButtonBackArrow:
                 this.finish();
+                break;
+
+            case R.id.scraperLinkButton:
+                startActivity(new Intent(this, AddWishlistItemActivity.class));
                 break;
 
         }
