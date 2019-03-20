@@ -88,8 +88,8 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
         favoriteColor = profile.getFavoriteColor();
 
         mAuth = FirebaseAuth.getInstance();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -119,6 +119,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
         findViewById(R.id.buttonEditInfo).setOnClickListener(this);
         findViewById(R.id.buttonEditWishlist).setOnClickListener(this);
         findViewById(R.id.buttonDeleteProfile).setOnClickListener(this);
+        findViewById(R.id.imageViewEditProfileBackButton).setOnClickListener(this);
 
 
 
@@ -283,26 +284,26 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
     }
 
 
-    //Create a menu button on the toolbar.
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    //Dropdown menu, currently the only option is to logout to main sign in screen.
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.menuLogout:
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-        }
-        return true;
-    }
+//    //Create a menu button on the toolbar.
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu, menu);
+//        return true;
+//    }
+//
+//    //Dropdown menu, currently the only option is to logout to main sign in screen.
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch(item.getItemId()) {
+//            case R.id.menuLogout:
+//                FirebaseAuth.getInstance().signOut();
+//                finish();
+//                startActivity(new Intent(this, MainActivity.class));
+//                break;
+//        }
+//        return true;
+//    }
 
     //method to allow the user to select an image.
     private void showImageChooser() {
@@ -375,6 +376,12 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
                 ad.show();
 
                 break;
+
+                //back to dashboard
+                case R.id.imageViewEditProfileBackButton:
+                    finish();
+                    startActivity(new Intent(this, AdminDashboardActivity.class));
+                    break;
 
         }
 

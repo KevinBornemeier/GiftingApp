@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageViewBackground"
+        android:id="@+id/imageViewLoginBackground"
         android:layout_width="match_parent"
         android:layout_height="385dp"
         android:scaleType="centerCrop"
@@ -21,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="412dp"
         android:orientation="vertical">
 
         <EditText
@@ -30,14 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="3dp"
             android:drawableBottom="#EB6D3B"
-            android:fontFamily="@font/gotham_medium"
+            android:fontFamily="@font/gotham_book"
             android:hint="EMAIL ADDRESS"
             android:inputType="textPersonName"
             android:textColorHint="#6F7F89"
             android:textColorLink="#EB6D3B"
-            android:textSize="19dp" />
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -45,23 +45,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:fontFamily="@font/gotham_medium"
+            android:fontFamily="@font/gotham_book"
             android:hint="PASSWORD"
             android:inputType="textPassword"
             android:textColorHint="#6F7F89"
             android:textColorLink="@color/colorAccent"
-            android:textSize="19dp" />
+            android:textSize="18dp" />
 
         <CheckBox
-            android:visibility="gone"
             android:id="@+id/checkBoxRememberMe"
             android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:text="@string/check_remember"
             android:fontFamily="@font/gotham_book"
-            android:textColor="#7C7C7C"
-            android:textStyle="bold" />
+            android:text="@string/check_remember"
+            android:textColor="#6F7F89"
+            android:textStyle="bold"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +72,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical">
 
         <Button
@@ -80,7 +80,7 @@
             android:layout_width="165dp"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/bgbtn"
             android:fontFamily="@font/gotham_bold"
             android:text="Login"

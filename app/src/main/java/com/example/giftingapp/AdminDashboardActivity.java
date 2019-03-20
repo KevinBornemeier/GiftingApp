@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -32,7 +33,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
 
-        findViewById(R.id.buttonAddNewProfile).setOnClickListener(this);
+        findViewById(R.id.imageViewAdd).setOnClickListener(this);
+        findViewById(R.id.textViewLogout).setOnClickListener(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -93,9 +95,15 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     public void onClick(View view) {
         switch(view.getId()) {
 
-            case R.id.buttonAddNewProfile:
+            case R.id.imageViewAdd:
                 finish();
                 startActivity(new Intent(this, CreateNewProfileActivity.class));
+                break;
+            //logout
+            case R.id.textViewLogout:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
                 break;
 
         }

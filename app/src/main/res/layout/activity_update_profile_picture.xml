@@ -10,7 +10,29 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent">
+
+        <TextView
+            android:id="@+id/toolbarEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Edit Profile"
+            android:textColor="#FFF"
+            android:fontFamily="@font/gotham_bold"
+            android:textAllCaps="true"
+            android:textSize="16dp"/>
+
+        <ImageView
+            android:id="@+id/imageViewEditProfileBackButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="left"
+            android:background="@drawable/back"/>
+
+    </android.support.v7.widget.Toolbar>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -18,7 +40,8 @@
         android:layout_marginTop="20dp"
         android:text="Tap on image to change profile picture"
         android:textAlignment="center"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        android:fontFamily="@font/gotham_book"
+        android:textSize="16dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,8 +74,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="Enter Display Name"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:inputType="textPersonName"
+        android:fontFamily="@font/gotham_book"/>
 
 
     <Button

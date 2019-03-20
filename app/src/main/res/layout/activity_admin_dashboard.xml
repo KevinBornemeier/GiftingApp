@@ -2,9 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
 
 
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/gotham_bold"
+            android:text="My Family"
+            android:textAllCaps="true"
+            android:textColor="#FFF"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/imageViewAdd"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/add" />
+
+    </android.support.v7.widget.Toolbar>
 
 
     <LinearLayout
@@ -12,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#f8ffffff"
+        android:background="#FFF"
         android:orientation="vertical"
         android:paddingBottom="10dp">
 
@@ -23,28 +50,33 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="560dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="75dp"></android.support.v7.widget.RecyclerView>
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="56dp">
 
+    </android.support.v7.widget.RecyclerView>
 
-
-    <Button
-        android:id="@+id/buttonAddNewProfile"
-        android:text="NEW PROFILE"
-        android:textColor="#FFF"
-        android:layout_width="175dp"
-        android:layout_height="35dp"
-        android:background="@drawable/bgbtn"
-        android:fontFamily="@font/gotham_bold"
+    <TextView
+        android:id="@+id/textViewLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="173dp"
+        android:layout_marginRight="173dp"
+        android:layout_marginBottom="13dp"
+        android:fontFamily="@font/gotham_book"
+        android:text="Logout"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+
 </RelativeLayout>

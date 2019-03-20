@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,9 +24,6 @@ import com.google.firebase.auth.FirebaseAuth;
     This activity has the user enter their email for the password recovery email to be sent to.
     Most of the work is done through Firebase.
 
-    TODO Update UI to match the rest of the app
-
-    -Mike
  */
 
 
@@ -33,7 +33,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     ProgressBar progress;
     EditText userEmail;
     Button userPass;
-    Button backButton;
+    TextView backLink;
+    Animation frombottom;
 
     FirebaseAuth firebaseAuth;
 
@@ -42,17 +43,22 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        //initialize animation for password recovery button
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        userPass = (Button) findViewById(R.id.forgotPassword);
+        userPass.startAnimation(frombottom);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         progress = (ProgressBar) findViewById(R.id.progressBar);
         userEmail = (EditText) findViewById(R.id.userEmail);
         userPass = (Button) findViewById(R.id.forgotPassword);
-        backButton = (Button) findViewById(R.id.backToMain);
+        backLink = (TextView) findViewById(R.id.backToMain);
 
         toolbar.setTitle("Forgot Password");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ForgotPasswordActivity.this, MainActivity.class));

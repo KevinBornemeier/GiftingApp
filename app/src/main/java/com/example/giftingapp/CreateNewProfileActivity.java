@@ -40,7 +40,7 @@ import java.util.List;
 This is the activity for account creation. Not for updates
  */
 
-public class CreateNewProfileActivity extends AppCompatActivity {
+public class CreateNewProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     EditText editText;
     ImageView imageView;
@@ -72,9 +72,12 @@ public class CreateNewProfileActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_profile);
+
+        findViewById(R.id.imageViewNewProfileBackButton).setOnClickListener(this);
+
         mAuth = FirebaseAuth.getInstance();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -283,25 +286,25 @@ public class CreateNewProfileActivity extends AppCompatActivity {
 
 
     //Create a menu button on the toolbar.
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu, menu);
+//        return true;
+//    }
 
     //Dropdown menu, currently the only option is to logout to main sign in screen.
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.menuLogout:
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch(item.getItemId()) {
+//            case R.id.menuLogout:
+//                FirebaseAuth.getInstance().signOut();
+//                finish();
+//                startActivity(new Intent(this, MainActivity.class));
+//                break;
+//        }
+//        return true;
+//    }
 
     //method to allow the user to select an image.
     private void showImageChooser() {
@@ -309,6 +312,20 @@ public class CreateNewProfileActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select profile image."), CHOOSE_IMAGE);
+    }
+
+    //on click method: switches layouts (views) upon clicking a button
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+
+            case R.id.imageViewNewProfileBackButton:
+                finish();
+                startActivity(new Intent(this, AdminDashboardActivity.class));
+                break;
+
+        }
+
     }
 
 

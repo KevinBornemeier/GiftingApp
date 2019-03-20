@@ -5,45 +5,50 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageViewBackground"
+        android:id="@+id/imageViewSignUpBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="385dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg2_blurred_2" />
+        android:src="@drawable/login_blurred" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="141dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="298dp"
+        android:layout_marginTop="414dp"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/editTextEmailSignUp"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/bginput"
-            android:ems="10"
-            android:hint="Email"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="3dp"
+            android:drawableBottom="#EB6D3B"
+            android:fontFamily="@font/gotham_book"
+            android:hint="EMAIL ADDRESS"
             android:inputType="textPersonName"
-            android:paddingLeft="30dp"
-            android:textColorHint="#F3F3ED" />
+            android:textColorHint="#6F7F89"
+            android:textColorLink="#EB6D3B"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/editTextPasswordSignUp"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="@drawable/bginput"
-            android:ems="10"
-            android:hint="Password"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:fontFamily="@font/gotham_book"
+            android:hint="PASSWORD"
             android:inputType="textPassword"
-            android:paddingLeft="30dp"
-            android:textColorHint="#F3F3ED" />
+            android:textColorHint="#6F7F89"
+            android:textColorLink="@color/colorAccent"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -55,23 +60,20 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginBottom="79dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/buttonCreateAccountSignUp"
             android:layout_width="165dp"
             android:layout_height="35dp"
-            android:layout_marginStart="115dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/bgbtn"
-            android:text="Sign up"
+            android:fontFamily="@font/gotham_bold"
+            android:text="Sign Up"
             android:textAllCaps="true"
-            android:textColor="#313335"
+            android:textColor="#FFF"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -79,20 +81,17 @@
             android:id="@+id/textViewCreateAccountLoginReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/gotham_book"
             android:text="Already have an account? Login!"
             android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="#FFF"
+            android:textColor="#7C7C7C"
             android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textViewSignUp"
         android:layout_width="349dp"
         android:layout_height="wrap_content"

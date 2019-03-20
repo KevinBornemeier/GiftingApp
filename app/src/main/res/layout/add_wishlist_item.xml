@@ -21,17 +21,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Submit"
+        app:layout_constraintBottom_toTopOf="@+id/scraperOutputView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemURLText" />
 
     <TextView
-        android:id="@+id/scrapperOutputView"
+        android:id="@+id/scraperOutputView"
         android:layout_width="match_parent"
         android:layout_height="304dp"
         android:layout_marginStart="8dp"
@@ -44,6 +46,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/scraperProductImage"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/scraperOutputView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemURLText" />
 
 </android.support.constraint.ConstraintLayout>
 

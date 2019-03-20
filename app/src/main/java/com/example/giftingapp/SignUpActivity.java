@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        //initialize animation
+        //initialize animations
         frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
         fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
 
