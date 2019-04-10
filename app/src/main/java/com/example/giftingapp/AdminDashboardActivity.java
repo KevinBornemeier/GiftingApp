@@ -111,6 +111,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
 
         CollectionReference profilesCollectionRef = db.collection("profiles");
 
+
+        //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
         Query profilesQuery = profilesCollectionRef
                 .whereEqualTo("userID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 

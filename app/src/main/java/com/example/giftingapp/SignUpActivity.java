@@ -124,9 +124,30 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(task.isSuccessful()) {
                     finish();
                     Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getBaseContext(), AdminDashboardActivity.class);
-                    intent.putExtra("userType", userType);
-                    startActivity(intent);
+
+                    /*
+                    At this point, userType should be set accordingly.  Now send the user to the correct activity.
+                    */
+
+                    if(userType.equals("Senior")) {
+                        finish();
+                        Intent intent = new Intent(SignUpActivity.this, SeniorDashboardActivity.class);
+                        intent.putExtra("userType", userType);
+                        startActivity(intent);
+
+                    }
+                    else {
+                        finish();
+                        Intent intent = new Intent(SignUpActivity.this, AdminDashboardActivity.class);
+                        intent.putExtra("userType", userType);
+                        startActivity(intent);
+
+                    }
+
+
+//                    Intent intent = new Intent(getBaseContext(), AdminDashboardActivity.class);
+//                    intent.putExtra("userType", userType);
+//                    startActivity(intent);
                 }
                 else{
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
