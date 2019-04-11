@@ -19,6 +19,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 /*
 NOTES from 2/28 (KB) :
@@ -57,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CheckBox checkBoxRememberMe;
     ProgressBar progressBar;
     FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private DocumentReference userRef;
+    String userType = "Administrator"; //set to admin by default.
+    String testUserID;
 
     ImageView imageViewBackground;
 
@@ -70,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mPrefs = getSharedPreferences(PREFS_EMAIL, MODE_PRIVATE);
+        db = FirebaseFirestore.getInstance();
 
 //        //initialize zoomed animation on login screen
 //        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
@@ -172,11 +184,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
-                    finish();
-                    Intent intent = new Intent(MainActivity.this, AdminDashboardActivity.class);
-                    //clear all activities on the stack and open a new activity.
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+
+                    /*
+                    If sign in is successful, we will check the UUID.  We will then queury the
+                    database for the usertype associated with the UUID.  After obtaining the user type,
+                    the user will be sent to the appropriate view within the app.
+                     */
+
+                    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    assert currentFirebaseUser != null;
+                    final String userID = currentFirebaseUser.getUid();
+
+                    db = FirebaseFirestore.getInstance();
+
+                    CollectionReference usersCollectionRef = db.collection("users");
+
+                    //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
+
+                    Query userTypeQuery = usersCollectionRef
+                            .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+
+                    userTypeQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()) {
+
+                                for(QueryDocumentSnapshot document: task.getResult()){
+                                    User user = document.toObject(User.class);
+                                    //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
+
+                                    userType = user.getUserType();
+                                    testUserID = user.getUserId();
+
+                                    /*
+                                    At this point, userType should be set accordingly.  Now send the user to the correct activity.
+                                    */
+
+                                    if(userType.equals("Senior")) {
+                                        finish();
+                                        Intent intent = new Intent(MainActivity.this, SeniorDashboardActivity.class);
+                                        //clear all activities on the stack and open a new activity.
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+
+                                    }
+                                    else {
+                                        finish();
+                                        Intent intent = new Intent(MainActivity.this, AdminDashboardActivity.class);
+                                        //clear all activities on the stack and open a new activity.
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+
+                                    }
+                                }
+
+
+
+                            }
+                            else{
+                                Toast.makeText(MainActivity.this, "Query failed -- failed to find userType", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    });
+
+
 
                 }
                 else{
