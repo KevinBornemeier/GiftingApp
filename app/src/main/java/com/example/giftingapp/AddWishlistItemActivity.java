@@ -1,6 +1,8 @@
 package com.example.giftingapp;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -8,8 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,10 +29,18 @@ import org.jsoup.nodes.Element;
 
 public class AddWishlistItemActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText itemURLText;
-    Button submitURLButton;
+    EditText editTextURL;
+    EditText editTextTitle;
+    EditText editTextPrice;
+    Button buttonSubmit;
+    Button buttonSave;
     TextView scraperOutputView;
     ImageView scraperProductImage;
+
+    WishlistItem item;
+    byte[] imageData;
+
+    private FirebaseFirestore db;
 
 
     @Override
@@ -28,27 +48,149 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_wishlist_item);
 
-        itemURLText = (EditText) findViewById(R.id.itemURLText);
-        submitURLButton = (Button) findViewById(R.id.submitURLButton);
-        scraperOutputView = (TextView) findViewById(R.id.scraperOutputView);
+        db = FirebaseFirestore.getInstance();
+
+        item = new WishlistItem();
+
+        editTextURL = (EditText) findViewById(R.id.editTextURL);
+        editTextTitle = (EditText) findViewById(R.id.editTextTitle);
+        editTextPrice = (EditText) findViewById(R.id.editTextPrice);
+        buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
+        buttonSave = (Button) findViewById(R.id.buttonSave);
+//        scraperOutputView = (TextView) findViewById(R.id.scraperOutputView);
         scraperProductImage = (ImageView) findViewById(R.id.scraperProductImage);
 
-        submitURLButton.setOnClickListener(this);
+        buttonSubmit.setOnClickListener(this);
+        buttonSave.setOnClickListener(this);
     }
 
 
 
     //web scraper testing
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.buttonSave:
+                save();
+                break;
+            case R.id.buttonSubmit:
+                runScraper();
+                break;
+        }
+    }
+
+
+    private void save(){
+        // TODO: Check if missing image and/or blank fields
+
+        // TODO: Show progress spinner, disable buttons
+
+        // Figure out if saving new or updating existing
+        if(item.getId() == null){
+            if(imageData != null){
+                // Have image, so upload
+                saveNewImageUpload();
+            } else {
+                // No image, just save data
+                saveNewData();
+            }
+        } else {
+            updateItem();
+        }
+    }
+
+
+    private void saveNewImageUpload(){
+        String path = "wishlistItems/" + System.currentTimeMillis() + ".jpg";
+        final StorageReference itemRef = FirebaseStorage.getInstance().getReference(path);
+
+        itemRef.putBytes(imageData)
+                .addOnSuccessListener(AddWishlistItemActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        itemRef.getDownloadUrl().addOnCompleteListener(AddWishlistItemActivity.this, new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                item.setImageURL(task.getResult().toString());
+                                saveNewData();
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(AddWishlistItemActivity.this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddWishlistItemActivity.this, "Uploading image failed", Toast.LENGTH_SHORT).show();
+                        // TODO: Hide progress spinner
+                    }
+                });
+    }
+
+
+    private void saveNewData(){
+        item.setPrice(editTextPrice.getText().toString().trim());
+        item.setTitle(editTextTitle.getText().toString().trim());
+        item.setItemURL(editTextURL.getText().toString().trim());
+
+        db.collection("wishlistItem").add(item)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(AddWishlistItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
+                        // TODO: Hide progress spinner
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddWishlistItemActivity.this, "Saving item failed", Toast.LENGTH_SHORT).show();
+                        // TODO: Hide progress spinner
+                    }
+                });
+
+        // TODO: Put id from database into item
+    }
+
+
+    private void updateItem(){
+        // Only allowed to update text fields, not picture
+        item.setPrice(editTextPrice.getText().toString().trim());
+        item.setTitle(editTextTitle.getText().toString().trim());
+        item.setItemURL(editTextURL.getText().toString().trim());
+
+        db.collection("wishlistItem")
+                .document(item.getId())
+                .update("price", item.getPrice(),
+                            "title", item.getTitle(),
+                            "itemURL", item.getItemURL())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AddWishlistItemActivity.this, "Item updated", Toast.LENGTH_SHORT).show();
+                        // TODO: Hide progress spinner
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddWishlistItemActivity.this, "Updating item failed", Toast.LENGTH_SHORT).show();
+                        // TODO: Hide progress spinner
+                    }
+                });
+    }
+
+
+    private void runScraper(){
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = itemURLText.getText().toString(); //convert url from EditText box to a string
-                String result = "";
+                String url = editTextURL.getText().toString(); //convert url from EditText box to a string
+//                String result = "";
+                String price = "";
+                String title = "";
                 String imageBase64 = "";
 
-                scraperOutputView.setText("Starting...");
+//                scraperOutputView.setText("Starting...");
 
                 try {
                     Document doc = Jsoup.connect(url) // Connect to the given URL, copy html data and store in variable "doc"
@@ -59,39 +201,46 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
                     //get item's title
                     e = doc.getElementById("productTitle");
-                    final String title = (e != null) ? e.text() : "(title not found)";
+                    title = (e != null) ? e.text() : "(title not found)";
 
                     //get item's price
                     e = doc.getElementById("priceblock_ourprice");
-                    final String price = (e != null) ? e.text() : "(price not found)";
+                    price = (e != null) ? e.text() : "(price not found)";
 
                     //get item's photo
                     e = doc.getElementById("landingImage");
                     final String imageURL = (e != null) ? e.absUrl("src") : "(image not found)"; //doesn't actually work
                     imageBase64 = (e != null) ? e.attr("src") : "(image not found)";
 
-                    result += "Product Title: " + title + "\n\n" + "Price: " + price + "\n\n" + "Image URL: (todo)";
-                    result += "\nIMG URL: " + imageURL + "\nIMG B64: " + imageBase64;
+//                    result += "Product Title: " + title + "\n\n" + "Price: " + price + "\n\n" + "Image URL: (todo)";
+//                    result += "\nIMG URL: " + imageURL + "\nIMG B64: " + imageBase64;
 
                 } catch (Exception e) {
-                    result += "\n" + e.getMessage();
+                    e.getMessage();
+//                    result += "\n" + e.getMessage();
                 }
 
-                final String output = result;
+//                final String output = result;
+                //TODO: need to add textViews for "price" and "title"
+                final String itemPrice = "Price: " + price;
+                final String itemTitle = "Title: " + title;
                 final byte[] imageBytes = convertB64(imageBase64);
+                imageData = imageBytes;
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        scraperOutputView.setText(output);
+//                        scraperOutputView.setText(output);
                         loadImage(imageBytes);
+                        editTextTitle.setText(itemTitle);
+                        editTextPrice.setText(itemPrice);
                     }
                 });
 
             }
         }).start();
-    }
 
+    }
 
 
     private byte[] convertB64(String b64){
@@ -119,4 +268,3 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 }
-
