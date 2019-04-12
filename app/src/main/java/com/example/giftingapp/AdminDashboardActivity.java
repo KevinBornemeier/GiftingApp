@@ -172,8 +172,14 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
             //logout
             case R.id.textViewLogout:
                 FirebaseAuth.getInstance().signOut();
+                //clear the android stack after logging out.
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("finish", true); // if you are checking for this in your other Activities
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
-                startActivity(new Intent(this, MainActivity.class));
                 break;
 
         }
