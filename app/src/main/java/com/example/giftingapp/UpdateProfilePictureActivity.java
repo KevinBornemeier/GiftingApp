@@ -341,7 +341,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
             case R.id.buttonEditWishlist:
                 //finish();
 
-                Intent intentWishlist = new Intent(this, UpdateProfileWishlistActivity.class);
+                Intent intentWishlist = new Intent(this, WishlistDashboard.class);
                 intentWishlist.putExtra("profile", profile);
                 startActivity(intentWishlist);
                 break;
