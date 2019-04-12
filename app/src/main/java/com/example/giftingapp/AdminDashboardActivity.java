@@ -75,12 +75,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         }
 
 
-
-
-
-
-
-
         findViewById(R.id.imageViewAdd).setOnClickListener(this);
         findViewById(R.id.textViewLogout).setOnClickListener(this);
 

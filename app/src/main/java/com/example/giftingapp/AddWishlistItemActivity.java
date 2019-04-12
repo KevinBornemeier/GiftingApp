@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -152,6 +153,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         item.setId(documentReference.getId());
+                        db.collection("wishlistItem").document(item.getId()).update("id", item.getId());
                         Toast.makeText(AddWishlistItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
                         goBack();
                         // TODO: Hide progress spinner
