@@ -95,7 +95,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
 //        }
 
         //set adapter to the recycler view
-        adapter = new MyAdapter(this, profileList);
+        adapter = new AdminDashboardAdapter(this, profileList);
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();

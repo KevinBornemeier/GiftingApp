@@ -1,18 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SeniorDashboardActivity">
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent">
+
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="290dp"
-        android:layout_height="221dp"
-        android:layout_marginTop="16dp"
-        android:text="Senior View"
-        android:textSize="60sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="39dp" />
-</android.support.constraint.ConstraintLayout>
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/gotham_bold"
+        android:text="My Family"
+        android:textAllCaps="true"
+        android:textColor="#FFF"
+        android:textSize="18dp" />
+
+</android.support.v7.widget.Toolbar>
+
+
+<LinearLayout
+    android:id="@+id/lin_result"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
+
+
+</LinearLayout>
+
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="560dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginStart="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginTop="56dp">
+
+</android.support.v7.widget.RecyclerView>
+
+<TextView
+    android:id="@+id/textViewLogout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="173dp"
+    android:layout_marginRight="173dp"
+    android:layout_marginBottom="13dp"
+    android:fontFamily="@font/gotham_book"
+    android:text="Logout"
+    android:textAlignment="center"
+    android:textColor="@color/colorAccent"
+    android:textStyle="bold" />
+
+
+</RelativeLayout>

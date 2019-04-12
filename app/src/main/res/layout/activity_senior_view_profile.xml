@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".SeniorViewProfileActivity">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent">
+
+    <TextView
+        android:id="@+id/toolbarEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/gotham_bold"
+        android:text="Name"
+        android:textAllCaps="true"
+        android:textColor="#FFF"
+        android:textSize="55dp" />
+
+    <ImageView
+        android:id="@+id/imageViewEditProfileBackButton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="left"
+        android:background="@drawable/back"/>
+
+</android.support.v7.widget.Toolbar>
+
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="391dp"
+            android:layout_height="222dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/icon_camera"
+            android:scaleType="centerCrop" />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+
+</RelativeLayout>
+
+
+    <Button
+        android:id="@+id/buttonEditInfo"
+        android:layout_width="358dp"
+        android:layout_height="87dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:text="Info"
+        android:textColor="#FFF"
+        android:textSize="45dp" />
+
+    <Button
+        android:id="@+id/buttonEditWishlist"
+        android:layout_width="368dp"
+        android:layout_height="88dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/gotham_bold"
+        android:paddingLeft="55dp"
+        android:paddingRight="55dp"
+        android:text="Wishlist"
+        android:textColor="#FFF"
+        android:textSize="45sp" />
+
+
+</LinearLayout>

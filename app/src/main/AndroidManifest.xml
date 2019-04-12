@@ -16,6 +16,9 @@
             android:name=".WishlistDashboard"
             android:label="@string/title_activity_wishlist_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SeniorViewWishlistActivity"></activity>
+        <activity android:name=".SeniorViewInfoActivity" />
+        <activity android:name=".SeniorViewProfileActivity" />
         <activity android:name=".SeniorDashboardActivity" />
         <activity android:name=".AddWishlistItemActivity" />
         <activity android:name=".ForgotPasswordActivity" />

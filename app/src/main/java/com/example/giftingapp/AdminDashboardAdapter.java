@@ -11,18 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class AdminDashboardAdapter extends RecyclerView.Adapter<AdminDashboardAdapter.ViewHolder> {
 
     private List<Profile> profileList;
     private Context context;
 
-    public MyAdapter(Context context, List<Profile> profileList) {
+    public AdminDashboardAdapter(Context context, List<Profile> profileList) {
         this.profileList = profileList;
         this.context = context;
     }
