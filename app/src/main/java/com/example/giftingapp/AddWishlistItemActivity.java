@@ -136,6 +136,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        item.setId(documentReference.getId());
                         Toast.makeText(AddWishlistItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
                         // TODO: Hide progress spinner
                     }

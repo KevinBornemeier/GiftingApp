@@ -1,14 +1,15 @@
 package com.example.giftingapp;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.io.Serializable;
 
 public class Profile implements Serializable {
 
-    @Exclude private String id;
+    //@Exclude private String id;
 
-    private String name, imageUrl, shoeSize, shirtSize, pantsSize, favoriteColor, userID;
+    private String name, imageUrl, shoeSize, shirtSize, pantsSize, favoriteColor, userID, id;
 
     //default constructor
     public Profile(){
@@ -16,7 +17,8 @@ public class Profile implements Serializable {
     }
 
     //constructor to initialize all values
-    public Profile(String userID, String name, String imageUrl, String shoeSize, String shirtSize, String pantsSize, String favoriteColor) {
+    public Profile(String id,String userID, String name, String imageUrl, String shoeSize, String shirtSize, String pantsSize, String favoriteColor) {
+        this.id = id;
         this.userID = userID;
         this.name = name;
         this.shoeSize = shoeSize;
@@ -26,7 +28,7 @@ public class Profile implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public void setId(String id) {
+    public void setID(String id) {
         this.id = id;
     }
 
@@ -58,7 +60,7 @@ public class Profile implements Serializable {
         this.userID = userID;
     }
 
-    public String getId() {
+    public String getID() {
         return id;
     }
 
