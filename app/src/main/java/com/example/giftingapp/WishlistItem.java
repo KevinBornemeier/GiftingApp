@@ -55,4 +55,5 @@ public class WishlistItem implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
 }

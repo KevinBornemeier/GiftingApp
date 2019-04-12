@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     byte[] imageData;
 
     private FirebaseFirestore db;
+    private Profile profile;
 
 
     @Override
@@ -49,6 +51,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.add_wishlist_item);
 
         db = FirebaseFirestore.getInstance();
+        profile = (Profile) getIntent().getSerializableExtra("profile");
 
         item = new WishlistItem();
 
@@ -63,7 +66,6 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         buttonSubmit.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
     }
-
 
 
     //web scraper testing
@@ -137,6 +139,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         item.setId(documentReference.getId());
+                        db.collection("wishlistItem").document(item.getId()).update("id", item.getId());
                         Toast.makeText(AddWishlistItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
                         // TODO: Hide progress spinner
                     }
