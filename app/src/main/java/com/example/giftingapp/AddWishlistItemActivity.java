@@ -1,5 +1,7 @@
 package com.example.giftingapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -35,14 +37,15 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     EditText editTextPrice;
     Button buttonSubmit;
     Button buttonSave;
-    TextView scraperOutputView;
+//    TextView scraperOutputView;
     ImageView scraperProductImage;
+    private Profile profile;
+    private Context context;
 
     WishlistItem item;
     byte[] imageData;
 
     private FirebaseFirestore db;
-    private Profile profile;
 
 
     @Override
@@ -51,7 +54,6 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.add_wishlist_item);
 
         db = FirebaseFirestore.getInstance();
-        profile = (Profile) getIntent().getSerializableExtra("profile");
 
         item = new WishlistItem();
 
@@ -65,10 +67,15 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
         buttonSubmit.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
+
+        profile = (Profile) getIntent().getSerializableExtra("profile");
+
     }
 
 
-    //web scraper testing
+
+    // If "submit" button is pressed, run the web scrapper.
+    // Otherwise, if "save item" button is pressed, store it in db
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -82,12 +89,19 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 
+    private void goBack(){
+        Intent intent = new Intent(this, WishlistDashboard.class);
+        intent.putExtra("profile", profile);
+        startActivity(intent);
+    }
+
+
     private void save(){
         // TODO: Check if missing image and/or blank fields
 
         // TODO: Show progress spinner, disable buttons
 
-        // Figure out if saving new or updating existing
+        // Figure out if saving new or updating existing item
         if(item.getId() == null){
             if(imageData != null){
                 // Have image, so upload
@@ -141,6 +155,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                         item.setId(documentReference.getId());
                         db.collection("wishlistItem").document(item.getId()).update("id", item.getId());
                         Toast.makeText(AddWishlistItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
+                        goBack();
                         // TODO: Hide progress spinner
                     }
                 })
@@ -155,7 +170,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         // TODO: Put id from database into item
     }
 
-
+    // TODO: Currently not being used. Will implement update item feature later
     private void updateItem(){
         // Only allowed to update text fields, not picture
         item.setPrice(editTextPrice.getText().toString().trim());
@@ -171,6 +186,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AddWishlistItemActivity.this, "Item updated", Toast.LENGTH_SHORT).show();
+                        goBack();
                         // TODO: Hide progress spinner
                     }
                 })

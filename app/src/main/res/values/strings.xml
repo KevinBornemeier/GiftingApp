@@ -4,4 +4,6 @@
     <string name="title_activity_profile">User Profile Setup</string>
     <string name="check_remember">Remember Me</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_wishlist_dashboard">wishlist_dashboard</string>
+    <string name="title_activity_wishlist_row">wishlist_row</string>
 </resources>
