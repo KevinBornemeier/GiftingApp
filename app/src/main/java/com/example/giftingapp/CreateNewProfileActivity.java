@@ -35,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 /*
 This is the activity for account creation. Not for updates
@@ -165,20 +166,23 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
                                 FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                                 assert currentFirebaseUser != null;
                                 String userID = currentFirebaseUser.getUid();
+                                String Id = "";
 
-                                Profile newProfile = new Profile(userID, displayName, profileImageUrl, "", "", "", "");
+                                final Profile newProfile = new Profile(Id,userID, displayName, profileImageUrl, "", "", "", "");
 
 
                                 //upload newProfile to database.
                                 //TODO: add an if input is validated statement to validate input before adding to collections.
                                 //collectionreference parameter specifies the collection name that all the fields will be stored in.
-                                CollectionReference dbProfiles = db.collection("profiles");
+                                final CollectionReference dbProfiles = db.collection("profiles");
 
                                 dbProfiles.add(newProfile)
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                             @Override
                                             public void onSuccess(DocumentReference documentReference) {
-                                                Toast.makeText(CreateNewProfileActivity.this, "Profile added", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(CreateNewProfileActivity.this, "Profile Created", Toast.LENGTH_LONG).show();
+                                                newProfile.setID(documentReference.getId());
+                                                db.collection("profiles").document(documentReference.getId()).update("id", documentReference.getId());
                                                 /*
                                                 After newProfile is created, exit the activity and launch the dashboard.
                                                 */
@@ -203,7 +207,6 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
         */
         //startActivity(new Intent(this, AdminDashboardActivity.class));
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
