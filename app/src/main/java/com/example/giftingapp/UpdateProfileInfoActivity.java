@@ -73,8 +73,6 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
                 break;
 
             case R.id.buttonSave:
-
-
                 //upon save, we update the profile with whatever is currently inside the editText fields.
                 profile.setShoeSize(editTextShoeSize.getText().toString().trim());
                 profile.setShirtSize(editTextShirtSize.getText().toString().trim());
@@ -82,17 +80,11 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
                 profile.setFavoriteColor(editTextFavoriteColor.getText().toString().trim());
 
                 //update name and imageUrl in the 'profile' collection
-                db.collection("profiles").document(profile.getId())
+                db.collection("profiles").document(profile.getID())
                         .update("shoeSize", profile.getShoeSize(), "shirtSize", profile.getShirtSize(),
                                 "pantsSize", profile.getPantsSize(), "favoriteColor", profile.getFavoriteColor()
                         );
                 Toast.makeText(this,"Info updated.", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
                 break;
 
         }

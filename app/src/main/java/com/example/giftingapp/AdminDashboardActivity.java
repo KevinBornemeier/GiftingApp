@@ -25,9 +25,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 public class AdminDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth mAuth;

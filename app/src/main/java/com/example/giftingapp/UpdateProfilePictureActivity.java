@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -176,6 +177,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
         }
 
         FirebaseUser user = mAuth.getCurrentUser();
+
         if(user!=null && imageUrl != null){
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
                     .setDisplayName(name)
@@ -191,12 +193,9 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
                         }
                     });
         }
-
-
         //update name and imageUrl in the 'profile' collection
-        db.collection("profiles").document(profile.getId())
+        db.collection("profiles").document(profile.getID())
                 .update("name", name, "imageUrl", imageUrl);
-
 
     }
 
@@ -315,7 +314,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
 
 
     private void deleteProfile(){
-        db.collection("profiles").document(profile.getId()).delete()
+        db.collection("profiles").document(profile.getID()).delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
