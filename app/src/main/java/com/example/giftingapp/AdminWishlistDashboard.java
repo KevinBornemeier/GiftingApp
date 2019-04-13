@@ -3,12 +3,9 @@ package com.example.giftingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,12 +18,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WishlistDashboard extends AppCompatActivity implements View.OnClickListener{
+public class AdminWishlistDashboard extends AppCompatActivity implements View.OnClickListener{
 
     private List<WishlistItem> itemList;
     private RecyclerView recyclerView;
@@ -65,7 +61,7 @@ public class WishlistDashboard extends AppCompatActivity implements View.OnClick
 
 
         //set adapter to the recycler view
-        adapter = new WishListAdapter(this, itemList);
+        adapter = new AdminWishListAdapter(this, itemList);
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
@@ -90,7 +86,7 @@ public class WishlistDashboard extends AppCompatActivity implements View.OnClick
 
                 }
                 else{
-                    Toast.makeText(WishlistDashboard.this, "Query failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdminWishlistDashboard.this, "Query failed", Toast.LENGTH_LONG).show();
                 }
 
             }

@@ -74,6 +74,54 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
             });
         }
 
+        //verify that the user is an admin.  If not, send them to the senior view.
+        CollectionReference usersCollectionRef = db.collection("users");
+
+        //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
+
+        Query userTypeQuery = usersCollectionRef
+                .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+
+        userTypeQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        User user = document.toObject(User.class);
+                        //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
+
+                        userType = user.getUserType();
+                        //testUserID = user.getUserId();
+
+                                    /*
+                                    At this point, userType should be set accordingly.  Now send the user to the correct activity.
+                                    */
+
+                        if(userType.equals("Senior")) {
+                            finish();
+                            Intent intent = new Intent(AdminDashboardActivity.this, SeniorDashboardActivity.class);
+                            //clear all activities on the stack and open a new activity.
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+
+                        }
+                    }
+
+
+
+                }
+                else{
+                    Toast.makeText(AdminDashboardActivity.this, "Query failed -- failed to find userType", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
+
 
         findViewById(R.id.imageViewAdd).setOnClickListener(this);
         findViewById(R.id.textViewLogout).setOnClickListener(this);
@@ -166,7 +214,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         switch(view.getId()) {
 
             case R.id.imageViewAdd:
-                finish();
                 startActivity(new Intent(this, CreateNewProfileActivity.class));
                 break;
             //logout

@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -90,7 +88,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
 
     private void goBack(){
-        Intent intent = new Intent(this, WishlistDashboard.class);
+        Intent intent = new Intent(this, AdminWishlistDashboard.class);
         intent.putExtra("profile", profile);
         startActivity(intent);
     }

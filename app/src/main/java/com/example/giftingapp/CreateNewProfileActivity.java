@@ -8,10 +8,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +31,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 /*
 This is the activity for account creation. Not for updates
@@ -186,8 +181,15 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
                                                 /*
                                                 After newProfile is created, exit the activity and launch the dashboard.
                                                 */
+
+                                                //clear the android stack after logging out.
+                                                Intent intent = new Intent(CreateNewProfileActivity.this, AdminDashboardActivity.class);
+                                                intent.putExtra("finish", true); // if you are checking for this in your other Activities
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
                                                 finish();
-                                                startActivity(new Intent(CreateNewProfileActivity.this, AdminDashboardActivity.class));
 
 
                                             }

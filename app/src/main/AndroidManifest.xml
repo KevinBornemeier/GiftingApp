@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".WishlistDashboard"
+            android:name=".AdminWishlistDashboard"
             android:label="@string/title_activity_wishlist_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SeniorViewWishlistActivity"></activity>

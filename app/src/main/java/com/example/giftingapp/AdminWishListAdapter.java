@@ -1,7 +1,6 @@
 package com.example.giftingapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,18 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
 
-public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolder>{
+public class AdminWishListAdapter extends RecyclerView.Adapter<AdminWishListAdapter.ItemViewHolder>{
 
     private List<WishlistItem> itemList;
     private Context context;
 
-    public WishListAdapter(Context context, List<WishlistItem> itemList) {
+    public AdminWishListAdapter(Context context, List<WishlistItem> itemList) {
         this.itemList = itemList;
         this.context = context;
     }
