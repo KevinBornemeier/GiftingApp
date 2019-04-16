@@ -76,7 +76,8 @@ public class WishlistDashboard extends AppCompatActivity implements View.OnClick
         Query itemQuery = itemsCollectionRef;
 //                .whereEqualTo("id", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        itemQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        itemQuery.whereEqualTo("profileID", profile.getID())
+            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {

@@ -143,6 +143,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 
+    /*
+    * Item's are saved and queried based on profileID's of the users.
+    * */
     private void saveNewData(){
         item.setPrice(editTextPrice.getText().toString().trim());
         item.setTitle(editTextTitle.getText().toString().trim());
@@ -153,7 +156,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         item.setId(documentReference.getId());
-                        db.collection("wishlistItem").document(item.getId()).update("id", item.getId());
+                        db.collection("wishlistItem").document(item.getId()).update("id", item.getId(), "profileID", profile.getID());
                         Toast.makeText(AddWishlistItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
                         goBack();
                         // TODO: Hide progress spinner
