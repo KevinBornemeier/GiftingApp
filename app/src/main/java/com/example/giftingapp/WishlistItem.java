@@ -9,11 +9,25 @@ public class WishlistItem implements Serializable {
     @Exclude
     private String id;
 
-    private String price, title, itemURL, imageURL;
+    private String price, title, itemURL, imageURL, profileID;
+
+    private boolean isPurchased;
 
 
 
     public WishlistItem() {
+    }
+
+    public WishlistItem(String id, String price, String title, String itemURL, String imageURL, String profileID, boolean isPurchased) {
+
+        this.id = id;
+        this.price = price;
+        this. title = title;
+        this.itemURL = itemURL;
+        this.imageURL = imageURL;
+        this.profileID = profileID;
+        this.isPurchased = isPurchased;
+
     }
 
     public String getPrice() {
@@ -36,6 +50,10 @@ public class WishlistItem implements Serializable {
         return id;
     }
 
+    public String getProfileID () { return profileID; }
+
+    public boolean getIsPurchased() { return isPurchased; }
+
     public void setPrice(String price) {
         this.price = price;
     }
@@ -56,4 +74,7 @@ public class WishlistItem implements Serializable {
         this.id = id;
     }
 
+    public void setProfileID(String profileID) { this.profileID = profileID; }
+
+    public void setIsPurchased(boolean isPurchased) { this.isPurchased = isPurchased; }
 }
