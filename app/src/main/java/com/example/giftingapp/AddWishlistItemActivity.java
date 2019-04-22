@@ -37,6 +37,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     EditText editTextPrice;
     Button buttonSubmit;
     Button buttonSave;
+    ImageView backbutton;
 //    TextView scraperOutputView;
     ImageView scraperProductImage;
     private Profile profile;
@@ -62,13 +63,28 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         editTextPrice = (EditText) findViewById(R.id.editTextPrice);
         buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
         buttonSave = (Button) findViewById(R.id.buttonSave);
+        backbutton = (ImageView) findViewById(R.id.imageView_Add_Back);
 //        scraperOutputView = (TextView) findViewById(R.id.scraperOutputView);
         scraperProductImage = (ImageView) findViewById(R.id.scraperProductImage);
 
         buttonSubmit.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
+        backbutton.setOnClickListener(this);
 
         profile = (Profile) getIntent().getSerializableExtra("profile");
+
+
+        // There will be an item in the intent for editing items
+        if(getIntent().hasExtra("item")){
+            item = (WishlistItem) getIntent().getSerializableExtra("item");
+            editTextPrice.setText(item.getPrice());
+            editTextTitle.setText(item.getTitle());
+            editTextURL.setText(item.getItemURL());
+            loadImage(item.getImageURL());
+
+            TextView title = findViewById(R.id.textView_Add_Wishlist);
+            title.setText("Edit Wishlist Item");
+        }
 
     }
 
@@ -84,6 +100,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.buttonSubmit:
                 runScraper();
+                break;
+            case R.id.imageView_Add_Back:
+                goBack();
                 break;
         }
     }
@@ -170,7 +189,6 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     }
                 });
 
-        // TODO: Put id from database into item
     }
 
     // TODO: Currently not being used. Will implement update item feature later
@@ -222,15 +240,15 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                             .get();
                     Element e;
 
-                    //get item's title
+                    // Get item's title
                     e = doc.getElementById("productTitle");
                     title = (e != null) ? e.text() : "(title not found)";
 
-                    //get item's price
+                    // Get item's price
                     e = doc.getElementById("priceblock_ourprice");
                     price = (e != null) ? e.text() : "(price not found)";
 
-                    //get item's photo
+                    // Get item's photo
                     e = doc.getElementById("landingImage");
                     final String imageURL = (e != null) ? e.absUrl("src") : "(image not found)"; //doesn't actually work
                     imageBase64 = (e != null) ? e.attr("src") : "(image not found)";

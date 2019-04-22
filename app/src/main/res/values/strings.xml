@@ -6,4 +6,5 @@
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="title_activity_wishlist_dashboard">wishlist_dashboard</string>
     <string name="title_activity_wishlist_row">wishlist_row</string>
+    <string name="title_activity_edit_item">activity_edit_item</string>
 </resources>

@@ -121,4 +121,8 @@ public class WishlistDashboard extends AppCompatActivity implements View.OnClick
         }
     }
 
+    public Profile getProfile(){
+        return profile;
+    }
+
 }

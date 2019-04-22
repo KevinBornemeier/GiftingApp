@@ -8,11 +8,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="489dp"
+        android:layout_width="match_parent"
         android:layout_height="139dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
             android:layout_width="414dp"
