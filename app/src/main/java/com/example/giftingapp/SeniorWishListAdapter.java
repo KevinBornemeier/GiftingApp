@@ -3,6 +3,7 @@ package com.example.giftingapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -90,8 +91,10 @@ public class SeniorWishListAdapter extends RecyclerView.Adapter<SeniorWishListAd
         @Override
         public void onClick(View v) {
             switch(v.getId()){
+                // Opens item's link to Amazon in the web browser
                 case R.id.buttonAmazonLink:
-                    // TODO: create link to item's amazon page
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getItemURL()));
+                    context.startActivity(browserIntent);
                     break;
 
             }

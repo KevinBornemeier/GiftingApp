@@ -191,7 +191,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
     }
 
-    // TODO: Currently not being used. Will implement update item feature later
+
     private void updateItem(){
         // Only allowed to update text fields, not picture
         item.setPrice(editTextPrice.getText().toString().trim());

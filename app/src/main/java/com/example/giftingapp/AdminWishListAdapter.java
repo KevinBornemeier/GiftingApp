@@ -3,6 +3,7 @@ package com.example.giftingapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -23,12 +26,12 @@ import java.util.List;
 
 
 
-class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolder>{
+class AdminWishListAdapter extends RecyclerView.Adapter<AdminWishListAdapter.ItemViewHolder>{
 
     private List<WishlistItem> itemList;
     private Context context;
 
-    public WishListAdapter(Context context, List<WishlistItem> itemList) {
+    public AdminWishListAdapter(Context context, List<WishlistItem> itemList) {
         this.itemList = itemList;
         this.context = context;
     }
@@ -46,14 +49,28 @@ class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolde
     public void onBindViewHolder(@NonNull ItemViewHolder viewHolder, int i) {
          WishlistItem item = itemList.get(i);
 
-         //load imageURL into the imageView
+         // Load imageURL into the imageView
          Glide.with(context).load(item.getImageURL()).into(viewHolder.wishlistItemImage);
 
-         //set the title for each item within the dashboard
+         // Set the title for each item within the dashboard
          viewHolder.wishlistItemTitle.setText(item.getTitle());
 
-         //set the price for each item within the dashboard
-         viewHolder.wishlistItemPrice.setText(item.getPrice());
+         // Set the price for each item
+         // If purchased, indicates with strikethrough on title and toggle purchase/available text/color on button
+         if(item.getIsPurchased() == false) {
+             viewHolder.wishlistItemPrice.setText(item.getPrice());
+             viewHolder.buttonItemPurchased.setText("Mark as Purchased");
+             viewHolder.wishlistItemPrice.setTextColor(0xFFF47C3A);
+             viewHolder.buttonItemPurchased.setBackgroundColor(0xFF00BCD4);
+             viewHolder.wishlistItemTitle.setPaintFlags(viewHolder.wishlistItemTitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+         }
+         else {
+             viewHolder.wishlistItemPrice.setText("PURCHASED");
+             viewHolder.wishlistItemPrice.setTextColor(0xFF2196F3);
+             viewHolder.buttonItemPurchased.setText("Mark as Available");
+             viewHolder.buttonItemPurchased.setBackgroundColor(0xFF2196F3);
+             viewHolder.wishlistItemTitle.setPaintFlags(viewHolder.wishlistItemTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+         }
 
          viewHolder.item = item;
 
@@ -72,6 +89,7 @@ class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolde
         TextView wishlistItemTitle;
         TextView wishlistItemPrice;
         Button buttonDeleteItem;
+        Button buttonItemPurchased;
         WishlistItem item;
 
         public ItemViewHolder(View itemView){
@@ -81,9 +99,11 @@ class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolde
             wishlistItemTitle = itemView.findViewById(R.id.wishlistItemTitle);
             wishlistItemPrice = itemView.findViewById(R.id.wishlistItemPrice);
             buttonDeleteItem = itemView.findViewById(R.id.buttonDeleteItem);
+            buttonItemPurchased = itemView.findViewById(R.id.buttonItemPurchased);
 
             itemView.setOnClickListener(this);
             buttonDeleteItem.setOnClickListener(this);
+            buttonItemPurchased.setOnClickListener(this);
         }
 
         // Deleting an item from a wishlist
@@ -104,6 +124,31 @@ class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolde
                             }
                         }
                     });
+        }
+
+        // Switches the value of the isPurchased field and saves it in the database
+        private void togglePurchased(){
+            item.setIsPurchased(!item.getIsPurchased());
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            db.collection("wishlistItem")
+                    .document(item.getId())
+                    .update("isPurchased", item.getIsPurchased())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(context, "Item updated", Toast.LENGTH_SHORT).show();
+                            notifyDataSetChanged();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Updating item failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
         }
 
         @Override
@@ -133,6 +178,10 @@ class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolde
                     //make the alert visable to the user.
                     AlertDialog ad = builder.create();
                     ad.show();
+                    break;
+
+                case R.id.buttonItemPurchased:
+                    togglePurchased();
                     break;
 
                 default:

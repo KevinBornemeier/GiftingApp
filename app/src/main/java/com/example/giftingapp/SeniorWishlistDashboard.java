@@ -68,10 +68,12 @@ public class SeniorWishlistDashboard extends AppCompatActivity implements View.O
         CollectionReference itemsCollectionRef = db.collection("wishlistItem");
 
         //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
-        Query itemQuery = itemsCollectionRef;
+//        Query itemQuery = itemsCollectionRef;
 //                .whereEqualTo("id", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        itemQuery.whereEqualTo("profileID", profile.getID())
+        // Query to find unpurchased items for the profile being viewed
+        itemsCollectionRef.whereEqualTo("profileID", profile.getID())
+            .whereEqualTo("isPurchased", false)
             .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
