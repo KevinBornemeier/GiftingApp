@@ -117,4 +117,8 @@ public class AdminWishlistDashboard extends AppCompatActivity implements View.On
         }
     }
 
+    public Profile getProfile(){
+        return profile;
+    }
+
 }

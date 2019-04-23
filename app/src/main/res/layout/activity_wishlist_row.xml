@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:maxHeight="5000dp"
                 android:minHeight="350dp"
-                android:scaleType="centerCrop" />
+                android:layout_gravity="center"/>
 
 
             <TextView
@@ -55,6 +55,23 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
                 android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/buttonDeleteItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="55dp"
+                android:paddingRight="55dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
+                android:text="Delete Item"
+                android:background="#cf0b0b"
+                android:fontFamily="@font/gotham_bold"
+                android:textSize="16dp"
+                android:textColor="#FFF"/>
 
 
         </LinearLayout>
