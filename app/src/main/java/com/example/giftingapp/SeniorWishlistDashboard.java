@@ -60,7 +60,7 @@ public class SeniorWishlistDashboard extends AppCompatActivity implements View.O
 
 
         //set adapter to the recycler view
-        adapter = new AdminWishListAdapter(this, itemList);
+        adapter = new SeniorWishListAdapter(this, itemList);
         recyclerViewSeniorWishlist.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
