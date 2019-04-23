@@ -26,6 +26,7 @@
         <activity android:name=".UpdateProfileInfoActivity" />
         <activity android:name=".UpdateProfilePictureActivity" />
         <activity android:name=".AdminDashboardActivity" />
+        <activity android:name=".SeniorWishlistDashboard" />
         <activity
             android:name=".CreateNewProfileActivity"
             android:label="@string/title_activity_profile"

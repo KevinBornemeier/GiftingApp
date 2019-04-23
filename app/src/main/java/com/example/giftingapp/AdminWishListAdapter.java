@@ -24,12 +24,12 @@ import java.util.List;
 
 
 
-public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolder>{
+public class AdminWishListAdapter extends RecyclerView.Adapter<AdminWishListAdapter.ItemViewHolder>{
 
     private List<WishlistItem> itemList;
     private Context context;
 
-    public WishListAdapter(Context context, List<WishlistItem> itemList) {
+    public AdminWishListAdapter(Context context, List<WishlistItem> itemList) {
         this.itemList = itemList;
         this.context = context;
     }
@@ -139,7 +139,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemVi
                 default:
                     Intent intent = new Intent(context, AddWishlistItemActivity.class);
                     intent.putExtra("item", item);
-                    WishlistDashboard dashboard = (WishlistDashboard)context;
+                    AdminWishlistDashboard dashboard = (AdminWishlistDashboard)context;
                     intent.putExtra("profile", dashboard.getProfile());
                     context.startActivity(intent);
                     break;

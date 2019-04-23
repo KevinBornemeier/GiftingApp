@@ -167,7 +167,7 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
             case R.id.buttonEditWishlist:
                 //finish();
 
-                Intent intentWishlist = new Intent(this, AdminWishlistDashboard.class);
+                Intent intentWishlist = new Intent(this, SeniorWishlistDashboard.class);
                 intentWishlist.putExtra("profile", profile);
                 startActivity(intentWishlist);
                 break;
