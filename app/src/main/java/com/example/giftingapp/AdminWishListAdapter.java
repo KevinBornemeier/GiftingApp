@@ -18,18 +18,17 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
 
-public class AdminWishListAdapter extends RecyclerView.Adapter<AdminWishListAdapter.ItemViewHolder>{
+class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ItemViewHolder>{
 
     private List<WishlistItem> itemList;
     private Context context;
 
-    public AdminWishListAdapter(Context context, List<WishlistItem> itemList) {
+    public WishListAdapter(Context context, List<WishlistItem> itemList) {
         this.itemList = itemList;
         this.context = context;
     }

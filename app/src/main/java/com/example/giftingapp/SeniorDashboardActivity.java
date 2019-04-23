@@ -42,6 +42,17 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senior_dashboard);
 
+        if (getIntent().hasExtra("refresh")) {
+            //clear the android stack after logging out.
+            Intent intent = new Intent(this, SeniorDashboardActivity.class);
+            intent.putExtra("finish", true); // if you are checking for this in your other Activities
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+
+        }
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();

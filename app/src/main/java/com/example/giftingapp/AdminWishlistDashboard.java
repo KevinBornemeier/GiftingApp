@@ -61,7 +61,7 @@ public class AdminWishlistDashboard extends AppCompatActivity implements View.On
 
 
         //set adapter to the recycler view
-        adapter = new AdminWishListAdapter(this, itemList);
+        adapter = new WishListAdapter(this, itemList);
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();

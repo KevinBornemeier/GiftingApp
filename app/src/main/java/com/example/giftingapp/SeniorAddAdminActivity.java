@@ -114,6 +114,7 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK |
                         Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("refresh", "refresh");
                 startActivity(intent);
                 finish();
 

@@ -34,6 +34,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     EditText editTextURL;
     EditText editTextTitle;
     EditText editTextPrice;
+    TextView title;
     Button buttonSubmit;
     Button buttonSave;
     ImageView backbutton;
@@ -81,7 +82,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
             editTextURL.setText(item.getItemURL());
             loadImage(item.getImageURL());
 
-            TextView title = findViewById(R.id.textView_Add_Wishlist);
+            title = findViewById(R.id.textView_Add_Wishlist);
             title.setText("Edit Wishlist Item");
         }
 
