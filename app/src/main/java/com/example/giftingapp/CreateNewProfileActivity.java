@@ -25,6 +25,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,6 +41,7 @@ This is the activity for account creation. Not for updates
 
 public class CreateNewProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
+    String adminEmail;
     EditText editText;
     ImageView imageView;
     ProgressBar progressBar;
@@ -55,6 +59,8 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        adminEmail = "test";
 
 
 //        RelativeLayout relativeLayout = new RelativeLayout(this);
@@ -160,46 +166,79 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
                                 //fill in profile data.
                                 FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                                 assert currentFirebaseUser != null;
-                                String userID = currentFirebaseUser.getUid();
-                                String Id = "";
+                                final String userID = currentFirebaseUser.getUid();
+                                final String Id = "";
 
-                                final Profile newProfile = new Profile(Id,userID, displayName, profileImageUrl, "", "", "", "");
+                                //extract current user's (administrator) email to be linked to profile.
+
+                                //verify that the user is an admin.  If not, send them to the senior view.
+                                CollectionReference usersCollectionRef = db.collection("users");
+
+                                //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
+
+                                Query userTypeQuery = usersCollectionRef
+                                        .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
 
-                                //upload newProfile to database.
-                                //TODO: add an if input is validated statement to validate input before adding to collections.
-                                //collectionreference parameter specifies the collection name that all the fields will be stored in.
-                                final CollectionReference dbProfiles = db.collection("profiles");
 
-                                dbProfiles.add(newProfile)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Toast.makeText(CreateNewProfileActivity.this, "Profile Created", Toast.LENGTH_LONG).show();
-                                                newProfile.setID(documentReference.getId());
-                                                db.collection("profiles").document(documentReference.getId()).update("id", documentReference.getId());
+                                userTypeQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful()) {
+
+                                            for(QueryDocumentSnapshot document: task.getResult()){
+                                                User user = document.toObject(User.class);
+                                                //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
+
+                                                adminEmail = user.getAdminEmail();
+
+                                                /*
+                                                At this point, adminEmail should be set accordingly.  Now set the profiel.
+                                                */
+                                                final Profile newProfile = new Profile(Id,userID, displayName, profileImageUrl, "", "", "", "", adminEmail);
+
+                                                //upload newProfile to database.
+                                                //TODO: add an if input is validated statement to validate input before adding to collections.
+                                                //collectionreference parameter specifies the collection name that all the fields will be stored in.
+                                                final CollectionReference dbProfiles = db.collection("profiles");
+
+                                                dbProfiles.add(newProfile)
+                                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                            @Override
+                                                            public void onSuccess(DocumentReference documentReference) {
+                                                                Toast.makeText(CreateNewProfileActivity.this, "Profile Created", Toast.LENGTH_LONG).show();
+                                                                newProfile.setID(documentReference.getId());
+                                                                db.collection("profiles").document(documentReference.getId()).update("id", documentReference.getId());
                                                 /*
                                                 After newProfile is created, exit the activity and launch the dashboard.
                                                 */
 
-                                                //clear the android stack after logging out.
-                                                Intent intent = new Intent(CreateNewProfileActivity.this, AdminDashboardActivity.class);
-                                                intent.putExtra("finish", true); // if you are checking for this in your other Activities
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                                                        Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
-                                                finish();
+                                                                //clear the android stack after logging out.
+                                                                Intent intent = new Intent(CreateNewProfileActivity.this, AdminDashboardActivity.class);
+                                                                intent.putExtra("finish", true); // if you are checking for this in your other Activities
+                                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                                                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                                                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                                startActivity(intent);
+                                                                finish();
 
+
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(CreateNewProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+
+                                                    }
+                                                });
 
                                             }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(CreateNewProfileActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
+                                        }
                                     }
                                 });
+
+
+
                             }
                         }
                     });

@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        String email = editTextEmail.getText().toString();
+        final String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
 
 
@@ -140,6 +140,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         finish();
                         Intent intent = new Intent(SignUpActivity.this, AdminDashboardActivity.class);
                         intent.putExtra("userType", userType);
+                        intent.putExtra("adminEmail", email);
                         startActivity(intent);
 
                     }

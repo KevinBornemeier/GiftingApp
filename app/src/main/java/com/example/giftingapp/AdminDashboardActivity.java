@@ -29,6 +29,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
 
     FirebaseAuth mAuth;
     String userType;
+    String adminEmail;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Profile> profileList;
@@ -47,13 +48,16 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         //'users' collection.
         if (getIntent().hasExtra("userType")) {
             userType = getIntent().getStringExtra("userType");
+            adminEmail = getIntent().getStringExtra("adminEmail");
 
             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             assert currentFirebaseUser != null;
             String userID = currentFirebaseUser.getUid();
 
+            String id = "";
+
             //make user profile object to be inserted into the database.
-            User newUser = new User(userID,userType);
+            final User newUser = new User(id, userID,userType, adminEmail);
 
             CollectionReference dbUsers = db.collection("users");
 
@@ -61,6 +65,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
+
+                            newUser.setID(documentReference.getId());
+                            db.collection("users").document(documentReference.getId()).update("ID", documentReference.getId());
                             Toast.makeText(AdminDashboardActivity.this, "User Added", Toast.LENGTH_LONG).show();
 
 

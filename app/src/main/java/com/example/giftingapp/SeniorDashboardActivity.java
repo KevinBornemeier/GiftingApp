@@ -30,6 +30,7 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
 
     FirebaseAuth mAuth;
     String userType;
+    String adminEmail;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Profile> profileList;
@@ -40,6 +41,8 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senior_dashboard);
+
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -52,8 +55,10 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
             assert currentFirebaseUser != null;
             String userID = currentFirebaseUser.getUid();
 
+            String id = "";
+
             //make user profile object to be inserted into the database.
-            User newUser = new User(userID,userType);
+            final User newUser = new User(id, userID,userType, "");
 
             CollectionReference dbUsers = db.collection("users");
 
@@ -61,7 +66,9 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(SeniorDashboardActivity.this, "User Added", Toast.LENGTH_LONG).show();
+                            newUser.setID(documentReference.getId());
+                            db.collection("users").document(documentReference.getId()).update("id", documentReference.getId());
+                            Toast.makeText(SeniorDashboardActivity.this, newUser.getID(), Toast.LENGTH_LONG).show();
 
 
                         }
@@ -78,6 +85,8 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
 
 
         findViewById(R.id.textViewLogout).setOnClickListener(this);
+        findViewById(R.id.imageViewAdd).setOnClickListener(this);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -95,39 +104,74 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
 //            listItems.add(listItem);
 //        }
 
-        //set adapter to the recycler view
-        adapter = new SeniorDashboardAdapter(this, profileList);
-        recyclerView.setAdapter(adapter);
+        //query for the current user's (senior) associated admin email.
+        CollectionReference usersCollectionRef = db.collection("users");
 
-        db = FirebaseFirestore.getInstance();
-
-        CollectionReference profilesCollectionRef = db.collection("profiles");
-
-
-        //NOTE: .whereequalto() hardcoded to adminTest@gmail.com's UserID for now.
         //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
-        Query profilesQuery = profilesCollectionRef
-                .whereEqualTo("userID", "UaY6d0jJuUh96QDOVEQN96cnIOn2");
 
-        profilesQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Query userTypeQuery = usersCollectionRef
+                .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+
+        userTypeQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
 
                     for(QueryDocumentSnapshot document: task.getResult()){
-                        Profile profile = document.toObject(Profile.class);
-                        profileList.add(profile);
+                        User user = document.toObject(User.class);
+                        //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
+
+                        adminEmail = user.getAdminEmail();
+                        /*
+                        At this point, adminEmail should be set accordingly.
+                        */
+
+                        //set adapter to the recycler view
+                        adapter = new SeniorDashboardAdapter(SeniorDashboardActivity.this, profileList);
+                        recyclerView.setAdapter(adapter);
+
+                        db = FirebaseFirestore.getInstance();
+
+                        CollectionReference profilesCollectionRef = db.collection("profiles");
+
+
+                        //NOTE: .whereequalto() hardcoded to adminTest@gmail.com's UserID for now.
+                        //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
+                        Query profilesQuery = profilesCollectionRef
+                                .whereEqualTo("adminEmail", adminEmail);
+
+                        profilesQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) {
+
+                                    for(QueryDocumentSnapshot document: task.getResult()){
+                                        Profile profile = document.toObject(Profile.class);
+                                        profileList.add(profile);
+                                    }
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+                                else{
+                                    Toast.makeText(SeniorDashboardActivity.this, "Query failed", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+
+
+
+
                     }
-
-                    adapter.notifyDataSetChanged();
-
                 }
-                else{
-                    Toast.makeText(SeniorDashboardActivity.this, "Query failed", Toast.LENGTH_LONG).show();
-                }
-
             }
         });
+
+
+
 
 
 //        //get() will return all documents
@@ -166,6 +210,10 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
+
+            case R.id.imageViewAdd:
+                startActivity(new Intent(this, SeniorAddAdminActivity.class));
+                break;
 
             //logout
             case R.id.textViewLogout:
