@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,10 +28,19 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
     private FirebaseFirestore db;
     FirebaseAuth mAuth;
 
+    Animation frombottom;
+    Button buttonSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senior_add_admin);
+
+
+        //initialize animation
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        buttonSave = (Button) findViewById(R.id.buttonSave);
+        buttonSave.startAnimation(frombottom);
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
