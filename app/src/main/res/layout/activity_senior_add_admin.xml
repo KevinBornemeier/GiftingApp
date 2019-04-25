@@ -6,81 +6,91 @@
     android:layout_height="match_parent"
     tools:context="com.wishlist.giftingapp.SeniorAddAdminActivity">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="404dp"
-        android:layout_height="724dp"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="4dp">
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="404dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAddAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/editTextEnterEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="171dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Enter Email"
-                android:inputType="textEmailAddress"
-                android:textSize="35sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/toolbarTextAddAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/oswald_medium"
+            android:text="Connect to an Acount"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="24dp" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="388dp"
-            android:layout_height="186dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/imageViewAddadminBackButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/back_blue" />
 
-            <TextView
-                android:id="@+id/textViewAddAdminTitleText"
-                android:layout_width="337dp"
-                android:layout_height="match_parent"
-                android:text="Enter your administrator's email below."
-                android:textSize="40sp" />
-        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
-        <LinearLayout
-            android:layout_width="387dp"
-            android:layout_height="105dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-            <Button
-                android:id="@+id/buttonSave"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Save"
-                android:textSize="35sp" />
-        </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/editTextEnterEmail"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"
+        android:textSize="32dp"
+        android:fontFamily="@font/oswald_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddAdminTitleText" />
+
+
+    <TextView
+        android:id="@+id/textViewAddAdminTitleText"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/oswald_regular"
+        android:text="Enter your administrator's email below to connect to their account."
+        android:textSize="36dp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddAdmin" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/oswald_regular"
+        android:text="Save"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEnterEmail"
+        app:layout_constraintVertical_bias="0.346" />
+
+
+
+
 </android.support.constraint.ConstraintLayout>

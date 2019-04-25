@@ -8,6 +8,9 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -32,6 +35,10 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
     TextView textView;
     private List<Profile> profileList;
 
+    Button profileInfo;
+    Button viewWishlist;
+    Animation frombottom;
+
     FirebaseAuth mAuth;
 
     Uri uriProfileImage;
@@ -48,6 +55,9 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_senior_view_profile);
+
 
 
 //        RelativeLayout relativeLayout = new RelativeLayout(this);
@@ -60,8 +70,16 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
 
 
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_senior_view_profile);
+
+        //initialize animation
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        profileInfo = (Button) findViewById(R.id.buttonEditInfo_Senior);
+        profileInfo.startAnimation(frombottom);
+
+        viewWishlist = (Button) findViewById(R.id.buttonEditWishlist_Senior);
+        viewWishlist.startAnimation(frombottom);
+
+
 
         //this grabs the profile that is clicked from the dashboard.
         db = FirebaseFirestore.getInstance();
@@ -98,8 +116,8 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
 
 
 
-        findViewById(R.id.buttonEditInfo).setOnClickListener(this);
-        findViewById(R.id.buttonEditWishlist).setOnClickListener(this);
+        findViewById(R.id.buttonEditInfo_Senior).setOnClickListener(this);
+        findViewById(R.id.buttonEditWishlist_Senior).setOnClickListener(this);
         findViewById(R.id.imageViewEditProfileBackButton).setOnClickListener(this);
 
 
@@ -161,12 +179,12 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.buttonEditInfo:
+            case R.id.buttonEditInfo_Senior:
                 Intent intent = new Intent(this, SeniorViewInfoActivity.class);
                 intent.putExtra("profile", profile);
                 startActivity(intent);
                 break;
-            case R.id.buttonEditWishlist:
+            case R.id.buttonEditWishlist_Senior:
                 //finish();
 
                 Intent intentWishlist = new Intent(this, SeniorWishlistDashboard.class);

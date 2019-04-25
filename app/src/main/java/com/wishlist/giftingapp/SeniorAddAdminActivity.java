@@ -36,6 +36,7 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
         editTextEnterEmail = findViewById(R.id.editTextEnterEmail);
 
         findViewById(R.id.buttonSave).setOnClickListener(this);
+        findViewById(R.id.imageViewAddadminBackButton).setOnClickListener(this);
 
 
         //query the DB to auto-update the text field to whatever is currently in place of the email(s).
@@ -121,7 +122,11 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
                 finish();
 
 
-
+            //back to dashboard
+            case R.id.imageViewAddadminBackButton:
+                finish();
+                startActivity(new Intent(this, SeniorDashboardActivity.class));
+                break;
         }
 
     }

@@ -9,7 +9,7 @@
         android:id="@+id/toolbarSeniorWishlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent">
+        android:background="@color/colorPrimary">
 
 
         <TextView
@@ -17,11 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/gotham_bold"
+            android:fontFamily="@font/oswald_medium"
             android:text="&quot;Profile Name&quot;s' Wishlist"
             android:textAllCaps="true"
-            android:textColor="#FFF"
-            android:textSize="18dp" />
+            android:textColor="@color/colorAccent"
+            android:textSize="24dp" />
 
 
         <ImageView
@@ -30,7 +30,7 @@
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="left"
-            android:background="@drawable/back"/>
+            android:background="@drawable/back_blue"/>
 
     </android.support.v7.widget.Toolbar>
 

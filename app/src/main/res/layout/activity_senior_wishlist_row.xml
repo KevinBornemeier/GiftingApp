@@ -32,46 +32,48 @@
 
             <TextView
                 android:id="@+id/seniorWishlistItemTitle"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="#E4F8FFFF"
-                android:fontFamily="@font/gotham_bold"
+                android:fontFamily="@font/oswald_medium"
                 android:paddingBottom="20dp"
                 android:text="Title"
                 android:textAlignment="center"
+                android:layout_gravity="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="50sp" />
+                android:textSize="38dp" />
 
             <TextView
                 android:id="@+id/seniorWishlistItemPrice"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="#E4F8FFFF"
-                android:fontFamily="@font/gotham_bold"
+                android:fontFamily="@font/oswald_regular"
                 android:paddingBottom="20dp"
                 android:text="Price"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:textSize="25sp" />
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/buttonAmazonLink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:paddingLeft="55dp"
                 android:paddingRight="55dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="30dp"
                 android:text="Go to Amazon"
-                android:background="#FF9900"
-                android:fontFamily="@font/gotham_bold"
-                android:textSize="16dp"
-                android:textColor="#FFF"/>
+                android:background="@drawable/bgbtn4"
+                android:fontFamily="@font/oswald_regular"
+                android:textSize="24dp"
+                android:textColor="@color/colorAccent"/>
 
 
         </LinearLayout>

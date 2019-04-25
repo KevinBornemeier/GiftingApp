@@ -44,7 +44,7 @@ public class SeniorViewInfoActivity extends AppCompatActivity implements View.On
         editTextShirtSize = findViewById(R.id.EditTextEditShirtSize);
         editTextPantsSize = findViewById(R.id.EditTextEditPantsSize);
         editTextFavoriteColor = findViewById(R.id.EditTextEditFavoriteColor);
-        textViewProfileName = findViewById(R.id.textViewProfileName);
+        textViewProfileName = findViewById(R.id.toolbar_title_profile);
 
 
         //set the editText name to display the profile name.
@@ -58,7 +58,7 @@ public class SeniorViewInfoActivity extends AppCompatActivity implements View.On
 
 
 
-        findViewById(R.id.imageButtonBackArrow).setOnClickListener(this);
+        findViewById(R.id.imageViewProfile_BackButton).setOnClickListener(this);
 
     }
 
@@ -69,7 +69,7 @@ public class SeniorViewInfoActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.imageButtonBackArrow:
+            case R.id.imageViewProfile_BackButton:
                 this.finish();
                 break;
         }
