@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.giftingapp">
+    package="com.wishlist.giftingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,31 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SeniorAddAdminActivity"></activity>
+        <activity android:name="com.wishlist.giftingapp.SeniorAddAdminActivity"></activity>
         <activity
-            android:name=".AdminWishlistDashboard"
+            android:name="com.wishlist.giftingapp.AdminWishlistDashboard"
             android:label="@string/title_activity_wishlist_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SeniorViewWishlistActivity" />
-        <activity android:name=".SeniorViewInfoActivity" />
-        <activity android:name=".SeniorViewProfileActivity" />
-        <activity android:name=".SeniorDashboardActivity" />
-        <activity android:name=".AddWishlistItemActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".UpdateProfileWishlistActivity" />
-        <activity android:name=".UpdateProfileInfoActivity" />
-        <activity android:name=".UpdateProfilePictureActivity" />
-        <activity android:name=".AdminDashboardActivity" />
-        <activity android:name=".SeniorWishlistDashboard" />
+        <activity android:name="com.wishlist.giftingapp.SeniorViewWishlistActivity" />
+        <activity android:name="com.wishlist.giftingapp.SeniorViewInfoActivity" />
+        <activity android:name="com.wishlist.giftingapp.SeniorViewProfileActivity" />
+        <activity android:name="com.wishlist.giftingapp.SeniorDashboardActivity" />
+        <activity android:name="com.wishlist.giftingapp.AddWishlistItemActivity" />
+        <activity android:name="com.wishlist.giftingapp.ForgotPasswordActivity" />
+        <activity android:name="com.wishlist.giftingapp.UpdateProfileWishlistActivity" />
+        <activity android:name="com.wishlist.giftingapp.UpdateProfileInfoActivity" />
+        <activity android:name="com.wishlist.giftingapp.UpdateProfilePictureActivity" />
+        <activity android:name="com.wishlist.giftingapp.AdminDashboardActivity" />
+        <activity android:name="com.wishlist.giftingapp.SeniorWishlistDashboard" />
         <activity
-            android:name=".CreateNewProfileActivity"
+            android:name="com.wishlist.giftingapp.CreateNewProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SignUpActivity"
+            android:name="com.wishlist.giftingapp.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.wishlist.giftingapp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

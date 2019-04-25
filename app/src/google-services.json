@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:330319548501:android:610b59f4c7ce15e0",
         "android_client_info": {
-          "package_name": "com.example.giftingapp"
+          "package_name": "com.wishlist.giftingapp"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "330319548501-c9h7ia8d78iio38m3k7tsn748sof51fe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.giftingapp",
+            "package_name": "com.wishlist.giftingapp",
             "certificate_hash": "62096f19b8a21f64cbd2065e0b949b293c4c8ce4"
           }
         },
