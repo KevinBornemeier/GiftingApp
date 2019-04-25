@@ -269,8 +269,8 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
                 try {
                     Document doc = Jsoup.connect(url) // Connect to the given URL, copy html data and store in variable "doc"
-//                          .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:65.0) Gecko/20100101 Firefox/65.0")
-                            .userAgent("Mozilla")
+                          .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:65.0) Gecko/20100101 Firefox/65.0")
+//                            .userAgent("Mozilla")
                             .get();
                     Element e;
 
@@ -321,6 +321,8 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
     private byte[] convertB64(String b64){
         String token = "data:image/jpeg;base64,";
+        if(b64.length() <= token.length() )
+            return new byte[0];
         return Base64.decode(b64.substring(token.length()), Base64.DEFAULT);
     }
 
