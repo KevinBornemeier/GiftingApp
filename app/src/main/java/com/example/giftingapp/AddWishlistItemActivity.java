@@ -8,9 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,11 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     ImageView backbutton;
 //    TextView scraperOutputView;
     ImageView scraperProductImage;
+
+    Animation frombottom;
+    Animation fromtop;
+    ProgressBar progressBar;
+
     private Profile profile;
     private Context context;
 
@@ -57,6 +65,19 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         db = FirebaseFirestore.getInstance();
 
         item = new WishlistItem();
+
+        //initialize animation
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
+
+        buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
+        buttonSubmit.startAnimation(fromtop);
+        buttonSave = (Button) findViewById(R.id.buttonSave);
+        buttonSave.startAnimation(frombottom);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+
 
         editTextURL = (EditText) findViewById(R.id.editTextURL);
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
@@ -118,7 +139,8 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     private void save(){
         // TODO: Check if missing image and/or blank fields
 
-        // TODO: Show progress spinner, disable buttons
+        // Show progress spinner, disable buttons
+        progressBar.setVisibility(View.VISIBLE);
 
         // Figure out if saving new or updating existing item
         if(item.getId() == null){
@@ -156,7 +178,8 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddWishlistItemActivity.this, "Uploading image failed", Toast.LENGTH_SHORT).show();
-                        // TODO: Hide progress spinner
+                        // Hide progress spinner
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }
@@ -178,14 +201,16 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                         db.collection("wishlistItem").document(item.getId()).update("id", item.getId(), "profileID", profile.getID(), "isPurchased", false);
                         Toast.makeText(AddWishlistItemActivity.this, "Item Saved", Toast.LENGTH_SHORT).show();
                         goBack();
-                        // TODO: Hide progress spinner
+                        // Hide progress spinner
+                        progressBar.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddWishlistItemActivity.this, "Saving item failed", Toast.LENGTH_SHORT).show();
-                        // TODO: Hide progress spinner
+                        // Hide progress spinner
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
 
@@ -208,20 +233,26 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AddWishlistItemActivity.this, "Item updated", Toast.LENGTH_SHORT).show();
                         goBack();
-                        // TODO: Hide progress spinner
+                        // Hide progress spinner
+                        progressBar.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddWishlistItemActivity.this, "Updating item failed", Toast.LENGTH_SHORT).show();
-                        // TODO: Hide progress spinner
+                        // Hide progress spinner
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }
 
 
     private void runScraper(){
+
+        // Show progress spinner, disable buttons
+        progressBar.setVisibility(View.VISIBLE);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -230,6 +261,7 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                 String price = "";
                 String title = "";
                 String imageBase64 = "";
+
 
 //                scraperOutputView.setText("Starting...");
 
@@ -262,9 +294,8 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                 }
 
 //                final String output = result;
-                //TODO: need to add textViews for "price" and "title"
-                final String itemPrice = "Price: " + price;
-                final String itemTitle = "Title: " + title;
+                final String itemPrice = price;
+                final String itemTitle = title;
                 final byte[] imageBytes = convertB64(imageBase64);
                 imageData = imageBytes;
 
@@ -275,6 +306,8 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                         loadImage(imageBytes);
                         editTextTitle.setText(itemTitle);
                         editTextPrice.setText(itemPrice);
+
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
 

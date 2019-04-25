@@ -34,14 +34,14 @@
                 android:id="@+id/textViewDisplayName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:paddingBottom="20dp"
-                android:fontFamily="@font/gotham_bold"
+                android:fontFamily="@font/oswald_light"
                 android:text="name"
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
-                android:background="#E4F8FFFF"
-                android:textSize="50sp" />
+                android:background="#FFFFFFFF"
+                android:textSize="40dp" />
 
 
         </LinearLayout>

@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
+//    Toolbar toolbar;
     ProgressBar progress;
     EditText userEmail;
     Button userPass;
@@ -43,18 +43,22 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        //initialize animation for password recovery button
+        //initialize animation for password recovery
         frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+
         userPass = (Button) findViewById(R.id.forgotPassword);
         userPass.startAnimation(frombottom);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        backLink = (TextView) findViewById(R.id.backToMain);
+        backLink.startAnimation(frombottom);
+
+//        toolbar = (Toolbar) findViewById(R.id.toolbar2);
         progress = (ProgressBar) findViewById(R.id.progressBar);
         userEmail = (EditText) findViewById(R.id.userEmail);
         userPass = (Button) findViewById(R.id.forgotPassword);
         backLink = (TextView) findViewById(R.id.backToMain);
 
-        toolbar.setTitle("Forgot Password");
+//        toolbar.setTitle("Forgot Password");
 
         firebaseAuth = FirebaseAuth.getInstance();
 

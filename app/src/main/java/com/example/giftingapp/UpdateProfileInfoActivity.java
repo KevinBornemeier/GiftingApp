@@ -4,6 +4,9 @@ package com.example.giftingapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,8 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
     private EditText editTextFavoriteColor;
     private TextView textViewProfileName;
 
+    Animation frombottom;
+    Button infoSave;
 
 
     private Profile profile;
@@ -35,15 +40,11 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
 
         profile = (Profile) getIntent().getSerializableExtra("profile");
 
-
-
-
-
         editTextShoeSize = findViewById(R.id.EditTextEditShoeSize);
         editTextShirtSize = findViewById(R.id.EditTextEditShirtSize);
         editTextPantsSize = findViewById(R.id.EditTextEditPantsSize);
         editTextFavoriteColor = findViewById(R.id.EditTextEditFavoriteColor);
-        textViewProfileName = findViewById(R.id.textViewProfileName);
+        textViewProfileName = findViewById(R.id.toolbar_title_profile);
 
 
         //set the editText name to display the profile name.
@@ -57,8 +58,17 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
 
 
 
-        findViewById(R.id.imageButtonBackArrow).setOnClickListener(this);
+        findViewById(R.id.imageViewProfile_BackButton).setOnClickListener(this);
         findViewById(R.id.buttonSave).setOnClickListener(this);
+
+
+        //initialize animation
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        infoSave = (Button) findViewById(R.id.buttonSave);
+        infoSave.startAnimation(frombottom);
+
+
+
     }
 
 
@@ -68,7 +78,7 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.imageButtonBackArrow:
+            case R.id.imageViewProfile_BackButton:
                 this.finish();
                 break;
 

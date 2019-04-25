@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
@@ -9,73 +9,147 @@
         android:layout_width="match_parent"
         android:layout_height="385dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/login_blurred" />
+        android:src="@drawable/login_blurred"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewEmail"
+        android:layout_width="20dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSignUpBackground" />
+
+    <ImageView
+        android:id="@+id/imageViewPassword"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSignUpBackground" />
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="414dp"
-        android:orientation="vertical">
+        android:layout_marginTop="18dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSignUpBackground"
+        tools:layout_editor_absoluteX="0dp">
 
         <EditText
             android:id="@+id/editTextEmailSignUp"
-            android:layout_width="match_parent"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="3dp"
             android:drawableBottom="#EB6D3B"
-            android:fontFamily="@font/gotham_book"
+            android:fontFamily="@font/oswald_extralight"
             android:hint="EMAIL ADDRESS"
+            android:paddingLeft="50dp"
             android:inputType="textPersonName"
             android:textColorHint="#6F7F89"
             android:textColorLink="#EB6D3B"
-            android:textSize="18dp" />
+            android:textSize="20dp" />
 
         <EditText
             android:id="@+id/editTextPasswordSignUp"
-            android:layout_width="match_parent"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:fontFamily="@font/gotham_book"
+            android:fontFamily="@font/oswald_extralight"
             android:hint="PASSWORD"
+            android:paddingLeft="50dp"
             android:inputType="textPassword"
             android:textColorHint="#6F7F89"
             android:textColorLink="@color/colorAccent"
-            android:textSize="18dp" />
+            android:textSize="20dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:paddingLeft="38dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+            <RadioButton
+                android:id="@+id/radioButtonAdministrator"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Administrator"
+                android:fontFamily="@font/oswald_light"
+                android:textAllCaps="true"
+                android:textColor="#555555"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonSenior"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Senior"
+                android:fontFamily="@font/oswald_light"
+                android:textAllCaps="true"
+                android:textColor="#555555"/>
+
+        </RadioGroup>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="0dp"
-        android:orientation="vertical">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/buttonCreateAccountSignUp"
-            android:layout_width="165dp"
-            android:layout_height="35dp"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/bgbtn"
-            android:fontFamily="@font/gotham_bold"
+            android:fontFamily="@font/oswald_medium"
             android:text="Sign Up"
             android:textAllCaps="true"
-            android:textColor="#FFF"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textColor="#082D52"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
         <TextView
             android:id="@+id/textViewCreateAccountLoginReturn"
@@ -83,77 +157,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/gotham_book"
+            android:fontFamily="@font/oswald_regular"
             android:text="Already have an account? Login!"
+            android:textSize="16dp"
             android:textAlignment="center"
-            android:textColor="#7C7C7C"
-            android:textStyle="bold" />
+            android:textColor="@color/colorPrimaryDark"/>
     </LinearLayout>
 
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/textViewSignUp"
-        android:layout_width="349dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="66dp"
-        android:text="Sign Up"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="#FFF"
-        android:textSize="48sp"
-        android:textStyle="bold" />
-
-    <!--<ImageButton
-        android:id="@+id/imageButtonBackArrow"
-        android:layout_width="134dp"
-        android:layout_height="90dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:adjustViewBounds="true"
-        android:padding="1dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/back_arrow" /> -->
 
     <ProgressBar
         android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="411dp"
+        android:layout_marginRight="411dp"
+        android:layout_marginBottom="659dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="79dp"
-        android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/radioButtonSenior"
-            android:layout_width="140dp"
-            android:layout_height="44dp"
-            android:layout_weight="1"
-            android:text="Senior" />
 
-        <RadioButton
-            android:id="@+id/radioButtonAdministrator"
-            android:layout_width="139dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Administrator" />
-    </RadioGroup>
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -9,6 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -49,6 +52,8 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
     String profileImageUrl, displayName;
     TextView textView;
     private List<Profile> profileList;
+    Button newProfile;
+    Animation frombottom;
 
     FirebaseAuth mAuth;
 
@@ -87,9 +92,6 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
         db = FirebaseFirestore.getInstance();
 
 
-
-
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,9 +109,10 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
         });
 
 
-
-
-
+        //initialize animation
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+        newProfile = (Button) findViewById(R.id.buttonSave);
+        newProfile.startAnimation(frombottom);
 
 
     }

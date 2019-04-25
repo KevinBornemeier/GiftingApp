@@ -11,6 +11,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -53,6 +56,11 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
     String shirtSize;
     String pantsSize;
     String favoriteColor;
+    Button editUpdate;
+    Button profileInfo;
+    Button profileWishlist;
+    Button profileDelete;
+    Animation frombottom;
 
     private FirebaseFirestore db;
     private Profile profile;
@@ -92,10 +100,6 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
 
 
 
-
-
-
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +122,20 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
         findViewById(R.id.imageViewEditProfileBackButton).setOnClickListener(this);
 
 
+        //initialize animation for buttons
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
 
+        editUpdate = (Button) findViewById(R.id.buttonSave);
+        editUpdate.startAnimation(frombottom);
+
+        profileInfo = (Button) findViewById(R.id.buttonEditInfo);
+        profileInfo.startAnimation(frombottom);
+
+        profileWishlist = (Button) findViewById(R.id.buttonEditWishlist);
+        profileWishlist.startAnimation(frombottom);
+
+        profileDelete = (Button) findViewById(R.id.buttonDeleteProfile);
+        profileDelete.startAnimation(frombottom);
 
 
     }

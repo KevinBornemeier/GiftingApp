@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ public class AdminWishlistDashboard extends AppCompatActivity implements View.On
     private TextView toolbar_title_wishlist;
     private Profile profile;
 
+
     FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -48,6 +52,7 @@ public class AdminWishlistDashboard extends AppCompatActivity implements View.On
         if(profile != null) {
             toolbar_title_wishlist.setText(profile.getName() + "'s Wishlist");
         }
+
 
 
         findViewById(R.id.imageViewAdd_wishlist).setOnClickListener(this);

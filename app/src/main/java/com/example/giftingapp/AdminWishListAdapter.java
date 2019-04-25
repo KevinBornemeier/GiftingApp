@@ -60,15 +60,17 @@ class AdminWishListAdapter extends RecyclerView.Adapter<AdminWishListAdapter.Ite
          if(item.getIsPurchased() == false) {
              viewHolder.wishlistItemPrice.setText(item.getPrice());
              viewHolder.buttonItemPurchased.setText("Mark as Purchased");
-             viewHolder.wishlistItemPrice.setTextColor(0xFFF47C3A);
-             viewHolder.buttonItemPurchased.setBackgroundColor(0xFF00BCD4);
+             viewHolder.wishlistItemPrice.setTextColor(0xFF555555);
+             viewHolder.buttonItemPurchased.setBackgroundResource(R.drawable.bgbtn3);
+//             viewHolder.buttonItemPurchased.setBackgroundColor(0xFF00BCD4);
              viewHolder.wishlistItemTitle.setPaintFlags(viewHolder.wishlistItemTitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
          }
          else {
              viewHolder.wishlistItemPrice.setText("PURCHASED");
-             viewHolder.wishlistItemPrice.setTextColor(0xFF2196F3);
+             viewHolder.wishlistItemPrice.setTextColor(0xFF555555);
              viewHolder.buttonItemPurchased.setText("Mark as Available");
-             viewHolder.buttonItemPurchased.setBackgroundColor(0xFF2196F3);
+             viewHolder.buttonItemPurchased.setBackgroundResource(R.drawable.bgbtn);
+//             viewHolder.buttonItemPurchased.setBackgroundColor(0xfffac53c);
              viewHolder.wishlistItemTitle.setPaintFlags(viewHolder.wishlistItemTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
          }
 

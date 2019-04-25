@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_AddWishlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -19,11 +19,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/gotham_bold"
+            android:fontFamily="@font/oswald_medium"
             android:text="Add Wishlist Item"
             android:textAllCaps="true"
-            android:textColor="#FFF"
-            android:textSize="18dp" />
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp" />
 
         <ImageView
             android:id="@+id/imageView_Add_Back"
@@ -31,32 +31,45 @@
             android:layout_height="25dp"
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/back" />
+            android:background="@drawable/back_blue" />
 
     </android.support.v7.widget.Toolbar>
 
 
+
     <EditText
         android:id="@+id/editTextURL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:hint="Paste URL here"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Submit"
+        android:fontFamily="@font/oswald_light"
+        android:hint="Paste URL here"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bgbtn3"
+        android:fontFamily="@font/oswald_regular"
+        android:text="Submit"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextURL" />
 
@@ -80,58 +93,59 @@
         android:layout_height="127dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:src="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/editTextTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextURL"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSubmit" />
 
     <EditText
         android:id="@+id/editTextPrice"
-        android:layout_width="200dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="176dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="10"
+        android:fontFamily="@font/oswald_light"
         android:inputType="textPersonName"
-        android:text="Price"
+        android:hint="Price"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
-        app:layout_constraintStart_toEndOf="@+id/scraperProductImage"
-        app:layout_constraintTop_toBottomOf="@+id/editTextURL" />
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
     <EditText
         android:id="@+id/editTextTitle"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="10"
+        android:fontFamily="@font/oswald_light"
         android:inputType="textMultiLine"
         android:scrollHorizontally="false"
         android:singleLine="false"
-        android:text="Title"
+        android:hint="Title"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/scraperProductImage" />
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -139,11 +153,34 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Save Item"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/bgbtn"
+        android:fontFamily="@font/oswald_regular"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTitle"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.524" />
+
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="411dp"
+        android:layout_marginLeft="411dp"
+        android:layout_marginTop="658dp"
+        android:layout_marginEnd="411dp"
+        android:layout_marginRight="411dp"
+        android:layout_marginBottom="659dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent">
+        android:background="@color/colorPrimary">
 
 
         <TextView
@@ -17,11 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/gotham_bold"
-            android:text="My Family"
-            android:textAllCaps="true"
-            android:textColor="#FFF"
-            android:textSize="18dp" />
+            android:fontFamily="@font/oswald_medium"
+            android:text="MY FAMILY"
+            android:textColor="#082D52"
+            android:textSize="20dp" />
 
         <ImageView
             android:id="@+id/imageViewAdd"
@@ -29,7 +28,7 @@
             android:layout_height="25dp"
             android:layout_gravity="right"
             android:layout_marginRight="30dp"
-            android:background="@drawable/add" />
+            android:background="@drawable/add_blue" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -50,7 +49,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="560dp"
+        android:layout_height="555dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -72,11 +71,11 @@
         android:layout_marginEnd="173dp"
         android:layout_marginRight="173dp"
         android:layout_marginBottom="13dp"
-        android:fontFamily="@font/gotham_book"
+        android:fontFamily="@font/oswald_regular"
         android:text="Logout"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold" />
+        android:textSize="18dp"
+        android:textColor="@color/colorAccent" />
 
 
 </RelativeLayout>

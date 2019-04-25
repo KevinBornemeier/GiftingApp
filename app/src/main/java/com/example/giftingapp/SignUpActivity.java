@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -42,13 +43,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         //initialize animations
         frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
-        fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
+//        fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
 
         buttonCreateAccountSignUp = (Button) findViewById(R.id.buttonCreateAccountSignUp);
-        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
+        textViewSignUp = (TextView) findViewById(R.id.textViewCreateAccountLoginReturn);
 
         buttonCreateAccountSignUp.startAnimation(frombottom);
-        textViewSignUp.startAnimation(fromtop);
+        textViewSignUp.startAnimation(frombottom);
 
 
 

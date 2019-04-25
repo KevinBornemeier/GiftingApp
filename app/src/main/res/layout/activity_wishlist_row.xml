@@ -32,62 +32,64 @@
 
             <TextView
                 android:id="@+id/wishlistItemTitle"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
                 android:background="#E4F8FFFF"
-                android:fontFamily="@font/gotham_bold"
+                android:fontFamily="@font/oswald_regular"
                 android:paddingBottom="20dp"
                 android:text="Title"
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="36sp" />
+                android:textSize="24dp" />
 
             <TextView
                 android:id="@+id/wishlistItemPrice"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_gravity="center"
                 android:background="#E4F8FFFF"
-                android:fontFamily="@font/gotham_bold"
+                android:fontFamily="@font/oswald_light"
                 android:paddingBottom="20dp"
                 android:text="Price"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:textSize="25sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/buttonDeleteItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:paddingLeft="55dp"
                 android:paddingRight="55dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="12dp"
                 android:text="Delete Item"
-                android:background="#cf0b0b"
-                android:fontFamily="@font/gotham_bold"
+                android:background="@drawable/bgbtn2"
+                android:fontFamily="@font/oswald_regular"
                 android:textSize="16dp"
-                android:textColor="#FFF"/>
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/buttonItemPurchased"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:paddingLeft="55dp"
                 android:paddingRight="55dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="30dp"
                 android:text="Mark as Purchased"
-                android:background="#00BCD4"
-                android:fontFamily="@font/gotham_bold"
+                android:background="@drawable/bgbtn3"
+                android:fontFamily="@font/oswald_regular"
                 android:textSize="16dp"
-                android:textColor="#FFF"/>
+                android:textColor="@color/colorPrimaryDark"/>
 
 
         </LinearLayout>

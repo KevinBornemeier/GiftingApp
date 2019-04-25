@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -60,14 +62,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextPassword;
     TextView forgotPassword;
     Button buttonSignIn;
-    Button buttonCreateAccount;
-    CheckBox checkBoxRememberMe;
+    TextView signUp;
+//    CheckBox checkBoxRememberMe;
     ProgressBar progressBar;
     FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private DocumentReference userRef;
     String userType = "Administrator"; //set to admin by default.
     String testUserID;
+
+    Animation frombottom;
 
     ImageView imageViewBackground;
 
@@ -86,11 +90,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        //initialize zoomed animation on login screen
 //        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
 //        imageViewBackground.animate().scaleX(2).scaleY(2).setDuration(3000).start();
+        frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
+
+        buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
+        buttonSignIn.startAnimation(frombottom);
+
+        signUp = (TextView) findViewById(R.id.textViewSignUp);
+        signUp.startAnimation(frombottom);
+
+        forgotPassword = (TextView) findViewById(R.id.textViewForgotPassword);
+        forgotPassword.startAnimation(frombottom);
+
 
         //initialize EditText, Buttons, etc...
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        mCheckBoxRemember = (CheckBox) findViewById(R.id.checkBoxRememberMe);
+//        mCheckBoxRemember = (CheckBox) findViewById(R.id.checkBoxRememberMe);
         forgotPassword = (TextView) findViewById(R.id.textViewForgotPassword);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -100,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.textViewForgotPassword).setOnClickListener(this);
         findViewById(R.id.textViewSignUp).setOnClickListener(this);
         findViewById(R.id.buttonSignIn).setOnClickListener(this);
-        findViewById(R.id.checkBoxRememberMe).setOnClickListener(this);
+//        findViewById(R.id.checkBoxRememberMe).setOnClickListener(this);
 
         //Retrieve stored user data.
         getPreferencesData();
@@ -118,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String passwd = sp.getString("pref_pass", "Password not found.");
             editTextPassword.setText(passwd.toString());
         }
-        if(sp.contains("pref_check")) {
-            Boolean bool = sp.getBoolean("pref_check", false);
-            mCheckBoxRemember.setChecked(bool);
-        }
+//        if(sp.contains("pref_check")) {
+//            Boolean bool = sp.getBoolean("pref_check", false);
+//            mCheckBoxRemember.setChecked(bool);
+//        }
     }
 
     //Validate user login information, if the user is a first time user then store their credentials.
@@ -160,16 +175,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //Store the user login information in cache, otherwise clear the data.
-        if(mCheckBoxRemember.isChecked()) {
-            Boolean boolIsChecked = mCheckBoxRemember.isChecked();
-            SharedPreferences.Editor editor = mPrefs.edit();
-            editor.putString("pref_email", email);
-            editor.putString("pref_pass", password);
-            editor.putBoolean("pref_check", boolIsChecked);
-            editor.apply();
-        } else {
-            mPrefs.edit().clear().apply();
-        }
+//        if(mCheckBoxRemember.isChecked()) {
+//            Boolean boolIsChecked = mCheckBoxRemember.isChecked();
+//            SharedPreferences.Editor editor = mPrefs.edit();
+//            editor.putString("pref_email", email);
+//            editor.putString("pref_pass", password);
+//            editor.putBoolean("pref_check", boolIsChecked);
+//            editor.apply();
+//        } else {
+//            mPrefs.edit().clear().apply();
+//        }
 
         /*
         if we reach this point, both the email and password are valid. -> sign in

@@ -10,18 +10,17 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent">
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/toolbarEditProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Edit Profile"
-            android:textColor="#FFF"
-            android:fontFamily="@font/gotham_bold"
-            android:textAllCaps="true"
-            android:textSize="16dp"/>
+            android:text="EDIT PROFILE"
+            android:textColor="#082D52"
+            android:fontFamily="@font/oswald_medium"
+            android:textSize="20dp"/>
 
         <ImageView
             android:id="@+id/imageViewEditProfileBackButton"
@@ -29,7 +28,7 @@
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="left"
-            android:background="@drawable/back"/>
+            android:background="@drawable/back_blue"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -40,7 +39,7 @@
         android:layout_marginTop="20dp"
         android:text="Tap on image to change profile picture"
         android:textAlignment="center"
-        android:fontFamily="@font/gotham_book"
+        android:fontFamily="@font/oswald_light"
         android:textSize="16dp"/>
 
     <RelativeLayout
@@ -53,7 +52,7 @@
             android:layout_height="170dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="20dp"
-            android:background="@drawable/icon_camera"
+            android:background="@drawable/camera"
             android:scaleType="centerCrop" />
 
         <ProgressBar
@@ -72,77 +71,80 @@
         android:id="@+id/editTextDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:hint="Enter Display Name"
+        android:textAlignment="center"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:inputType="textPersonName"
-        android:fontFamily="@font/gotham_book"/>
+        android:fontFamily="@font/oswald_regular"
+        android:textSize="26dp"/>
 
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="Update Name and Picture"
-        android:textColor="#FFF"
+        android:text="Update Profile"
+        android:textColor="#555555"
         android:background="@drawable/bgbtn"
-        android:fontFamily="@font/gotham_bold"
+        android:fontFamily="@font/oswald_regular"
         android:textSize="16dp"/>
 
     <Button
         android:id="@+id/buttonEditInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="12dp"
-        android:text="Edit Info"
-        android:background="@drawable/bgbtn"
-        android:fontFamily="@font/gotham_bold"
+        android:text="Profile Info"
+        android:background="@drawable/bgbtn3"
+        android:fontFamily="@font/oswald_regular"
         android:textSize="16dp"
-        android:textColor="#FFF"/>
+        android:textColor="#555555"/>
 
     <Button
         android:id="@+id/buttonEditWishlist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="12dp"
-        android:text="Edit Wishlist"
-        android:background="@drawable/bgbtn"
-        android:fontFamily="@font/gotham_bold"
+        android:text="Wishlist"
+        android:background="@drawable/bgbtn3"
+        android:fontFamily="@font/oswald_regular"
         android:textSize="16dp"
-        android:textColor="#FFF"/>
+        android:textColor="#555555"/>
 
     <Button
         android:id="@+id/buttonDeleteProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/bgbtn2"
+        android:fontFamily="@font/oswald_regular"
         android:paddingLeft="55dp"
         android:paddingRight="55dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="12dp"
         android:text="Delete Profile"
-        android:background="#cf0b0b"
-        android:fontFamily="@font/gotham_bold"
-        android:textSize="16dp"
-        android:textColor="#FFF"/>
+        android:textColor="#FFF"
+        android:textSize="16dp" />
 
 
 </LinearLayout>
