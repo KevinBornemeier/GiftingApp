@@ -13,10 +13,6 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import com.wishlist.giftingapp.Profile;
-
-import com.wishlist.giftingapp.R;
-
 
 public class UpdateProfileInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -98,6 +94,8 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
                                 "pantsSize", profile.getPantsSize(), "favoriteColor", profile.getFavoriteColor()
                         );
                 Toast.makeText(this,"Info updated.", Toast.LENGTH_SHORT).show();
+
+
                 break;
 
         }

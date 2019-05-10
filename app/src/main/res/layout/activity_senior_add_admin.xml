@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/oswald_medium"
-            android:text="Connect to an Acount"
+            android:text="Connect to an Account"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
             android:textSize="24dp" />
@@ -36,34 +36,14 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <EditText
-        android:id="@+id/editTextEnterEmail"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:hint="Enter Email"
-        android:inputType="textEmailAddress"
-        android:textSize="32dp"
-        android:fontFamily="@font/oswald_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddAdminTitleText" />
-
-
     <TextView
         android:id="@+id/textViewAddAdminTitleText"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:fontFamily="@font/oswald_regular"
-        android:text="Ready to connect your account? Enter the email of the person who set up your account."
-        android:textSize="36dp"
+        android:text="Enter the email of the person who set up your account."
         android:textColor="@color/colorAccent"
+        android:textSize="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,10 +55,9 @@
         android:layout_height="50dp"
         android:layout_marginStart="55dp"
         android:layout_marginLeft="55dp"
-        android:layout_marginTop="72dp"
         android:layout_marginEnd="56dp"
         android:layout_marginRight="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/bgbtn"
         android:fontFamily="@font/oswald_regular"
         android:text="Save"
@@ -86,11 +65,77 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="361dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEnterEmail"
-        app:layout_constraintVertical_bias="0.346" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddAdminTitleText">
 
+        <EditText
+            android:id="@+id/editTextEnterEmail1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/oswald_light"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.713" />
 
+        <EditText
+            android:id="@+id/editTextEnterEmail2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/oswald_light"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.713" />
 
+        <EditText
+            android:id="@+id/editTextEnterEmail3"
+            android:layout_width="440dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/oswald_light"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.713" />
+
+        <EditText
+            android:id="@+id/editTextEnterEmail4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/oswald_light"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.713" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

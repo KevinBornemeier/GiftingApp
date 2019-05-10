@@ -43,7 +43,6 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     Button buttonSubmit;
     Button buttonSave;
     ImageView backbutton;
-//    TextView scraperOutputView;
     ImageView scraperProductImage;
 
     Animation frombottom;
@@ -87,7 +86,6 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         buttonSubmit = (Button) findViewById(R.id.buttonSubmit);
         buttonSave = (Button) findViewById(R.id.buttonSave);
         backbutton = (ImageView) findViewById(R.id.imageView_Add_Back);
-//        scraperOutputView = (TextView) findViewById(R.id.scraperOutputView);
         scraperProductImage = (ImageView) findViewById(R.id.scraperProductImage);
 
         buttonSubmit.setOnClickListener(this);
@@ -113,14 +111,17 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
 
 
-    // If "submit" button is pressed, run the web scrapper.
-    // Otherwise, if "save item" button is pressed, store it in db
+
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            // If "save item" button is pressed, store it in db
             case R.id.buttonSave:
                 save();
                 break;
+            // If "submit" button is pressed, run the web scrapper.
             case R.id.buttonSubmit:
                 runScraper();
                 break;
@@ -139,8 +140,6 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
 
     private void save(){
-        // TODO: Check if missing image and/or blank fields
-
         // Show progress spinner, disable buttons
         progressBar.setVisibility(View.VISIBLE);
 
@@ -158,7 +157,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
         }
     }
 
-
+    /**
+     * Uploads image to Firebase. If sucessful, saves that url to the item's data.
+     */
     private void saveNewImageUpload(){
         String path = "wishlistItems/" + System.currentTimeMillis() + ".jpg";
         final StorageReference itemRef = FirebaseStorage.getInstance().getReference(path);
@@ -187,9 +188,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 
-    /*
+    /**
     * Item's are saved and queried based on profileID's of the users.
-    * */
+    */
     private void saveNewData(){
         item.setPrice(editTextPrice.getText().toString().trim());
         item.setTitle(editTextTitle.getText().toString().trim());
@@ -218,7 +219,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
 
     }
 
-
+    /**
+     * Save edited item data
+     */
     private void updateItem(){
         // Only allowed to update text fields, not picture
         item.setPrice(editTextPrice.getText().toString().trim());
@@ -250,6 +253,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 
+    /**
+     * Loads Amazon's page from user's entered URl, and pulls info such as title, price, and product image.
+     */
     private void runScraper(){
 
         // Show progress spinner, disable buttons
@@ -259,18 +265,13 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
             @Override
             public void run() {
                 String url = editTextURL.getText().toString(); //convert url from EditText box to a string
-//                String result = "";
                 String price = "";
                 String title = "";
                 String imageBase64 = "";
 
-
-//                scraperOutputView.setText("Starting...");
-
                 try {
                     Document doc = Jsoup.connect(url) // Connect to the given URL, copy html data and store in variable "doc"
                           .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:65.0) Gecko/20100101 Firefox/65.0")
-//                            .userAgent("Mozilla")
                             .get();
                     Element e;
 
@@ -287,15 +288,11 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                     final String imageURL = (e != null) ? e.absUrl("src") : "(image not found)"; //doesn't actually work
                     imageBase64 = (e != null) ? e.attr("src") : "(image not found)";
 
-//                    result += "Product Title: " + title + "\n\n" + "Price: " + price + "\n\n" + "Image URL: (todo)";
-//                    result += "\nIMG URL: " + imageURL + "\nIMG B64: " + imageBase64;
 
                 } catch (Exception e) {
                     e.getMessage();
-//                    result += "\n" + e.getMessage();
                 }
 
-//                final String output = result;
                 final String itemPrice = price;
                 final String itemTitle = title;
                 final byte[] imageBytes = convertB64(imageBase64);
@@ -304,7 +301,6 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        scraperOutputView.setText(output);
                         loadImage(imageBytes);
                         editTextTitle.setText(itemTitle);
                         editTextPrice.setText(itemPrice);
@@ -319,6 +315,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 
+    /**
+     * Decodes a base 64 string of image data, and turns it into a byte array
+     */
     private byte[] convertB64(String b64){
         String token = "data:image/jpeg;base64,";
         if(b64.length() <= token.length() )
@@ -327,8 +326,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 
-
-    // Set image from a converted base 64 image
+    /**
+     * Set image from a converted base 64 image
+     */
     private void loadImage(byte[] bytes){
         Glide.with(AddWishlistItemActivity.this)
                 .asBitmap()
@@ -337,8 +337,9 @@ public class AddWishlistItemActivity extends AppCompatActivity implements View.O
     }
 
 
-
-    // Set image from a url string
+    /**
+     * Set image from a url string
+     */
     private void loadImage(String image){
         Glide.with(AddWishlistItemActivity.this)
                 .load(image)

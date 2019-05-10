@@ -25,8 +25,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wishlist.giftingapp.R;
-
 public class AdminDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth mAuth;
@@ -59,7 +57,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
             String id = "";
 
             //make user profile object to be inserted into the database.
-            final User newUser = new User(id, userID,userType, adminEmail);
+            final User newUser = new User(id, userID,userType, adminEmail, "", "", "");
 
             CollectionReference dbUsers = db.collection("users");
 

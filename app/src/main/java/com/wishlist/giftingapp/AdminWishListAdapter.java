@@ -109,7 +109,10 @@ class AdminWishListAdapter extends RecyclerView.Adapter<AdminWishListAdapter.Ite
             buttonItemPurchased.setOnClickListener(this);
         }
 
-        // Deleting an item from a wishlist
+
+        /**
+         * Deleting an item from a wishlist
+         */
         private void deleteItem(){
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -129,7 +132,10 @@ class AdminWishListAdapter extends RecyclerView.Adapter<AdminWishListAdapter.Ite
                     });
         }
 
-        // Switches the value of the isPurchased field and saves it in the database
+
+        /**
+         * Switches the value of the isPurchased field and saves it in the database
+         */
         private void togglePurchased(){
             item.setIsPurchased(!item.getIsPurchased());
 

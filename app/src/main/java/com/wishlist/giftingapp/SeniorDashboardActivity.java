@@ -25,14 +25,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wishlist.giftingapp.R;
-
 
 public class SeniorDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth mAuth;
     String userType;
-    String adminEmail;
+    String adminEmail1;
+    String adminEmail2;
+    String adminEmail3;
+    String adminEmail4;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<Profile> profileList;
@@ -51,8 +52,8 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                     Intent.FLAG_ACTIVITY_CLEAR_TASK |
                     Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
             finish();
+            startActivity(intent);
 
         }
 
@@ -71,7 +72,7 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
             String id = "";
 
             //make user profile object to be inserted into the database.
-            final User newUser = new User(id, userID,userType, "");
+            final User newUser = new User(id, userID,userType, "", "", "", "");
 
             CollectionReference dbUsers = db.collection("users");
 
@@ -136,9 +137,13 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
                         User user = document.toObject(User.class);
                         //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
 
-                        adminEmail = user.getAdminEmail();
+                        adminEmail1 = user.getAdminEmail1();
+                        adminEmail2 = user.getAdminEmail2();
+                        adminEmail3 = user.getAdminEmail3();
+                        adminEmail4 = user.getAdminEmail4();
+
                         /*
-                        At this point, adminEmail should be set accordingly.
+                        At this point, adminEmail(s) should be set accordingly.
                         */
 
                         //set adapter to the recycler view
@@ -152,10 +157,82 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
 
                         //NOTE: .whereequalto() hardcoded to adminTest@gmail.com's UserID for now.
                         //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
-                        Query profilesQuery = profilesCollectionRef
-                                .whereEqualTo("adminEmail", adminEmail);
 
-                        profilesQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        //query for all the adminEmails to fill in the profile list appropriately.
+
+                        Query profilesQuery1 = profilesCollectionRef
+                                .whereEqualTo("adminEmail", adminEmail1) ;
+
+                        Query profilesQuery2 = profilesCollectionRef
+                                .whereEqualTo("adminEmail", adminEmail2) ;
+
+                        Query profilesQuery3 = profilesCollectionRef
+                                .whereEqualTo("adminEmail", adminEmail3) ;
+
+                        Query profilesQuery4 = profilesCollectionRef
+                                .whereEqualTo("adminEmail", adminEmail4) ;
+
+                        profilesQuery1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) {
+
+                                    for(QueryDocumentSnapshot document: task.getResult()){
+                                        Profile profile = document.toObject(Profile.class);
+                                        profileList.add(profile);
+                                    }
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+                                else{
+                                    Toast.makeText(SeniorDashboardActivity.this, "Query failed", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+
+                        profilesQuery2.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) {
+
+                                    for(QueryDocumentSnapshot document: task.getResult()){
+                                        Profile profile = document.toObject(Profile.class);
+                                        profileList.add(profile);
+                                    }
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+                                else{
+                                    Toast.makeText(SeniorDashboardActivity.this, "Query failed", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+
+                        profilesQuery3.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) {
+
+                                    for(QueryDocumentSnapshot document: task.getResult()){
+                                        Profile profile = document.toObject(Profile.class);
+                                        profileList.add(profile);
+                                    }
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+                                else{
+                                    Toast.makeText(SeniorDashboardActivity.this, "Query failed", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+
+                        profilesQuery4.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()) {

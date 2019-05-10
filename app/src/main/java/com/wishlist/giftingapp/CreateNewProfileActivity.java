@@ -38,8 +38,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.List;
 
-import com.wishlist.giftingapp.R;
-
 /*
 This is the activity for account creation. Not for updates
  */
@@ -195,7 +193,7 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
                                                 User user = document.toObject(User.class);
                                                 //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
 
-                                                adminEmail = user.getAdminEmail();
+                                                adminEmail = user.getAdminEmail1();
 
                                                 /*
                                                 At this point, adminEmail should be set accordingly.  Now set the profiel.

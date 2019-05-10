@@ -20,11 +20,15 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import com.wishlist.giftingapp.R;
-
 public class SeniorAddAdminActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText editTextEnterEmail;
-    String adminEmail;
+    EditText editTextEnterEmail1;
+    EditText editTextEnterEmail2;
+    EditText editTextEnterEmail3;
+    EditText editTextEnterEmail4;
+    String adminEmail1;
+    String adminEmail2;
+    String adminEmail3;
+    String adminEmail4;
     private FirebaseFirestore db;
     FirebaseAuth mAuth;
 
@@ -45,7 +49,10 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        editTextEnterEmail = findViewById(R.id.editTextEnterEmail);
+        editTextEnterEmail1 = findViewById(R.id.editTextEnterEmail1);
+        editTextEnterEmail2 = findViewById(R.id.editTextEnterEmail2);
+        editTextEnterEmail3 = findViewById(R.id.editTextEnterEmail3);
+        editTextEnterEmail4 = findViewById(R.id.editTextEnterEmail4);
 
         findViewById(R.id.buttonSave).setOnClickListener(this);
         findViewById(R.id.imageViewAddadminBackButton).setOnClickListener(this);
@@ -64,7 +71,10 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
 
                     for(QueryDocumentSnapshot document: task.getResult()){
                         User user = document.toObject(User.class);
-                        editTextEnterEmail.setText(user.getAdminEmail());
+                        editTextEnterEmail1.setText(user.getAdminEmail1());
+                        editTextEnterEmail2.setText(user.getAdminEmail2());
+                        editTextEnterEmail3.setText(user.getAdminEmail3());
+                        editTextEnterEmail4.setText(user.getAdminEmail4());
                         break;
 
                     }
@@ -89,7 +99,10 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
 
             case R.id.buttonSave:
 
-                adminEmail = editTextEnterEmail.getText().toString().trim();
+                adminEmail1 = editTextEnterEmail1.getText().toString().trim();
+                adminEmail2 = editTextEnterEmail2.getText().toString().trim();
+                adminEmail3 = editTextEnterEmail3.getText().toString().trim();
+                adminEmail4 = editTextEnterEmail4.getText().toString().trim();
 
 
 
@@ -107,7 +120,8 @@ public class SeniorAddAdminActivity extends AppCompatActivity implements View.On
                                 Toast.makeText(SeniorAddAdminActivity.this,document.getId(), Toast.LENGTH_SHORT).show();
 
                                 db.collection("users").document(document.getId())
-                                        .update("adminEmail", adminEmail);
+                                        .update("adminEmail1", adminEmail1, "adminEmail2", adminEmail2,
+                                                "adminEmail3", adminEmail3, "adminEmail4", adminEmail4);
                                 Toast.makeText(SeniorAddAdminActivity.this,"Admin updated.", Toast.LENGTH_SHORT).show();
                                 break;
 

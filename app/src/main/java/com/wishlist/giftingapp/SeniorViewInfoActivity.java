@@ -37,9 +37,6 @@ public class SeniorViewInfoActivity extends AppCompatActivity implements View.On
         profile = (Profile) getIntent().getSerializableExtra("profile");
 
 
-
-
-
         editTextShoeSize = findViewById(R.id.EditTextEditShoeSize);
         editTextShirtSize = findViewById(R.id.EditTextEditShirtSize);
         editTextPantsSize = findViewById(R.id.EditTextEditPantsSize);
