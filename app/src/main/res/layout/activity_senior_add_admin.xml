@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:fontFamily="@font/oswald_regular"
-        android:text="Enter your administrator's email below to connect to their account."
+        android:text="Ready to connect your account? Enter the email of the person who set up your account."
         android:textSize="36dp"
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
