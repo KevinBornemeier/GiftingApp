@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import com.wishlist.giftingapp.Profile;
 
-import com.wishlist.giftingapp.R;
-
-
+/*
+Class to modify the info module that's available to the senior user.  All this class essentially does is pull info from the DB
+and update text fields for the senior user.
+ */
 public class SeniorViewInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView editTextShoeSize;

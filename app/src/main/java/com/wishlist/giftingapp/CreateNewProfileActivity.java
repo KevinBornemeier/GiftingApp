@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.util.List;
 
 /*
-This is the activity for account creation. Not for updates
+This is the activity for profile creation. Not for updates.  Each individual profile is associated to the admin user who created it.
  */
 
 public class CreateNewProfileActivity extends AppCompatActivity implements View.OnClickListener{
@@ -67,24 +67,12 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
 
         adminEmail = "test";
 
-
-//        RelativeLayout relativeLayout = new RelativeLayout(this);
-//        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.MATCH_PARENT,
-//                RelativeLayout.LayoutParams.MATCH_PARENT
-//        );
-//        relativeLayout.setLayoutParams(relativeParams);
-//        setContentView(relativeLayout);
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_profile);
 
         findViewById(R.id.imageViewNewProfileBackButton).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -99,7 +87,6 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
 
             }
         });
-       // loadUserInformation();
 
         findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,17 +115,9 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
     }
 
 
-    // Pull user information from the database including username, profile picture, and status of email verification.
-    // TODO: Implement password recovery and email changing options for users.
-
-
-
     /*
-    * TODO Note from Mike
-    * Right now the app will only determine a successful profile creation if the user enters a name
-    * AND uploads a photo.
     *
-    * This method save the users profile information and stores it in firebase.
+    * This method saves the users profile information and stores it in firebase.
     */
     private void saveUserInformation() {
         displayName = editText.getText().toString();
@@ -191,7 +170,6 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
 
                                             for(QueryDocumentSnapshot document: task.getResult()){
                                                 User user = document.toObject(User.class);
-                                                //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
 
                                                 adminEmail = user.getAdminEmail1();
 
@@ -246,10 +224,6 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
                         }
                     });
         }
-        /*
-        After newProfile is created, exit the activity and launch the dashboard.
-        */
-        //startActivity(new Intent(this, AdminDashboardActivity.class));
     }
 
     @Override
@@ -311,47 +285,10 @@ public class CreateNewProfileActivity extends AppCompatActivity implements View.
                         }
                     });
 
-//            progressBar.setVisibility(View.VISIBLE);
-//            profileImageRef.putFile(uriProfileImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    progressBar.setVisibility(View.GONE);
-//
-//                    profileImageUrl = profileImageRef.getDownloadUrl().toString();
-//                }
-//            })
-//            .addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    progressBar.setVisibility(View.GONE);
-//                    Toast.makeText(CreateNewProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
         }
 
     }
 
-
-    //Create a menu button on the toolbar.
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu, menu);
-//        return true;
-//    }
-
-    //Dropdown menu, currently the only option is to logout to main sign in screen.
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch(item.getItemId()) {
-//            case R.id.menuLogout:
-//                FirebaseAuth.getInstance().signOut();
-//                finish();
-//                startActivity(new Intent(this, MainActivity.class));
-//                break;
-//        }
-//        return true;
-//    }
 
     //method to allow the user to select an image.
     private void showImageChooser() {

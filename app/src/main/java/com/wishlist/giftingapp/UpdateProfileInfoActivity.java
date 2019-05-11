@@ -13,7 +13,10 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-
+/*
+This activity allows the admin user to update profile info.  This class essentially checks to see the text
+inputted into the text boxes and updates the fields within the database accordingly.
+ */
 public class UpdateProfileInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextShoeSize;
@@ -49,6 +52,7 @@ public class UpdateProfileInfoActivity extends AppCompatActivity implements View
         //set the editText name to display the profile name.
         String profileName = getIntent().getExtras().getString("profileName");
         textViewProfileName.setText(profile.getName() + "'s Info");
+
         //autofill the rest of the data with what is currently in the database.
         editTextShirtSize.setText(profile.getShirtSize());
         editTextPantsSize.setText(profile.getPantsSize());

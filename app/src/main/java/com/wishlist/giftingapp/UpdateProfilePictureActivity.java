@@ -36,8 +36,10 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.List;
 
-import com.wishlist.giftingapp.R;
-
+/*
+This activity is what is seen after an admin taps on a profile within the dashboard.  The admin may update
+the name and picture within this acitivity.
+ */
 public class UpdateProfilePictureActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editText;
@@ -70,16 +72,6 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-//        RelativeLayout relativeLayout = new RelativeLayout(this);
-//        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.MATCH_PARENT,
-//                RelativeLayout.LayoutParams.MATCH_PARENT
-//        );
-//        relativeLayout.setLayoutParams(relativeParams);
-//        setContentView(relativeLayout);
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile_picture);
 
@@ -94,8 +86,6 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
         favoriteColor = profile.getFavoriteColor();
 
         mAuth = FirebaseAuth.getInstance();
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -154,7 +144,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
 
 
     // Pull user information from the database including username, profile picture, and status of email verification.
-    // TODO: Implement password recovery and email changing options for users.
+
 
     private void loadUserInformation() {
         final FirebaseUser user = mAuth.getCurrentUser();
@@ -174,10 +164,6 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
     }
 
     /*
-     * TODO Note from Mike
-     * Right now the app will only determine a successful profile creation if the user enters a name
-     * AND uploads a photo.
-     *
      * This method save the users profile information and stores it in firebase.
      */
     private void saveUserInformation() {
@@ -276,47 +262,10 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
                         }
                     });
 
-//            progressBar.setVisibility(View.VISIBLE);
-//            profileImageRef.putFile(uriProfileImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    progressBar.setVisibility(View.GONE);
-//
-//                    profileImageUrl = profileImageRef.getDownloadUrl().toString();
-//                }
-//            })
-//            .addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    progressBar.setVisibility(View.GONE);
-//                    Toast.makeText(CreateNewProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
         }
 
     }
 
-
-//    //Create a menu button on the toolbar.
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu, menu);
-//        return true;
-//    }
-//
-//    //Dropdown menu, currently the only option is to logout to main sign in screen.
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch(item.getItemId()) {
-//            case R.id.menuLogout:
-//                FirebaseAuth.getInstance().signOut();
-//                finish();
-//                startActivity(new Intent(this, MainActivity.class));
-//                break;
-//        }
-//        return true;
-//    }
 
     //method to allow the user to select an image.
     private void showImageChooser() {

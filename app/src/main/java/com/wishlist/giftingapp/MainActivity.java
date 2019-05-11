@@ -29,25 +29,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import com.wishlist.giftingapp.R;
-
 /*
-NOTES from 2/28 (KB) :
-*Link to database: https://console.firebase.google.com/project/gifting-app/overview
-*Tutorial to set up your Android settings to run the app: https://www.youtube.com/watch?time_continue=3&v=cNPCgJW8c-E
-*
-* NOTES from 3/13 (KB)
-*Tutorial to set up dependencies with Recycler View: https://www.youtube.com/watch?v=USbTcGx1mD0&list=PLk7v1Z2rk4hjHrGKo9GqOtLs1e2bglHHA&index=1
-* ****Note: in the recycler view tutorial, he only shows how to display dummy data with it.  You have to do a bit more to set it up to dynamically work with the database.
-* TODO:  *Polish UI
-* TODO:  (in the dashboard activity) allow space for the 'add new profile' button so that it doesnt stack on top of the recycler view in the dashboard activity. Also add a 'logout' button next to the 'add new profile' button.
-* ---------For this, just swap the logout function to be performed upon clicking the logout button and remove the hidden drop-down menu from the 'updateProfilePicture' activity
-* ---------and the 'createNewProfilePicture' activity.
-* TODO (KB):  *Condense the data in the recycler view so that it only displays picture and name in the dashboard -- Additional details/wishlists should be available on-click.
-* TODO (KB):  *Modify the recycler view so that it displays the actual image, not the imageURL.
-* TODO (KB):  *Finish implementing the CreateNewProfile activities.
-* TODO: Implement the Wishlist Activity to display wishlist collections with a Recycler view.  From there, the user should be able to click on each wishlist object to
-* ------access info such as: picture of item, price, URL.
+Main Activity, AKA the start-up page for the app.
 *
  */
 
@@ -58,14 +41,12 @@ NOTES from 2/28 (KB) :
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //Variable declarations
     String email, password;
     EditText editTextEmail;
     EditText editTextPassword;
     TextView forgotPassword;
     Button buttonSignIn;
     TextView signUp;
-//    CheckBox checkBoxRememberMe;
     ProgressBar progressBar;
     FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -89,9 +70,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPrefs = getSharedPreferences(PREFS_EMAIL, MODE_PRIVATE);
         db = FirebaseFirestore.getInstance();
 
-//        //initialize zoomed animation on login screen
-//        imageViewBackground = (ImageView) findViewById(R.id.imageViewBackground);
-//        imageViewBackground.animate().scaleX(2).scaleY(2).setDuration(3000).start();
         frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
 
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
@@ -107,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //initialize EditText, Buttons, etc...
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-//        mCheckBoxRemember = (CheckBox) findViewById(R.id.checkBoxRememberMe);
         forgotPassword = (TextView) findViewById(R.id.textViewForgotPassword);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -117,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.textViewForgotPassword).setOnClickListener(this);
         findViewById(R.id.textViewSignUp).setOnClickListener(this);
         findViewById(R.id.buttonSignIn).setOnClickListener(this);
-//        findViewById(R.id.checkBoxRememberMe).setOnClickListener(this);
 
         //Retrieve stored user data.
         getPreferencesData();
@@ -135,10 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String passwd = sp.getString("pref_pass", "Password not found.");
             editTextPassword.setText(passwd.toString());
         }
-//        if(sp.contains("pref_check")) {
-//            Boolean bool = sp.getBoolean("pref_check", false);
-//            mCheckBoxRemember.setChecked(bool);
-//        }
     }
 
     //Validate user login information, if the user is a first time user then store their credentials.
@@ -176,17 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        //Store the user login information in cache, otherwise clear the data.
-//        if(mCheckBoxRemember.isChecked()) {
-//            Boolean boolIsChecked = mCheckBoxRemember.isChecked();
-//            SharedPreferences.Editor editor = mPrefs.edit();
-//            editor.putString("pref_email", email);
-//            editor.putString("pref_pass", password);
-//            editor.putBoolean("pref_check", boolIsChecked);
-//            editor.apply();
-//        } else {
-//            mPrefs.edit().clear().apply();
-//        }
 
         /*
         if we reach this point, both the email and password are valid. -> sign in
@@ -230,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 for(QueryDocumentSnapshot document: task.getResult()){
                                     User user = document.toObject(User.class);
-                                    //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
 
                                     userType = user.getUserType();
                                     testUserID = user.getUserId();
@@ -315,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    //showToast method: displays text
+    //showToast method: displays text within the activity.
     private void showToast(String text) {
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
     }

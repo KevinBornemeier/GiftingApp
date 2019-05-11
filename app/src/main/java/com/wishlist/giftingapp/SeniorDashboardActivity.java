@@ -25,7 +25,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+This class lists profiles in the senior dashnoard.
+ */
 public class SeniorDashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth mAuth;
@@ -108,15 +110,6 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
 
         profileList = new ArrayList<>();
 
-        //dummy data test
-//        for(int i = 0; i<=10; i++) {
-//            ListItem listItem = new ListItem(
-//                "heading" + (i+1),
-//                "dummy text"
-//            );
-//
-//            listItems.add(listItem);
-//        }
 
         //query for the current user's (senior) associated admin email.
         CollectionReference usersCollectionRef = db.collection("users");
@@ -154,9 +147,6 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
 
                         CollectionReference profilesCollectionRef = db.collection("profiles");
 
-
-                        //NOTE: .whereequalto() hardcoded to adminTest@gmail.com's UserID for now.
-                        //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
 
                         //query for all the adminEmails to fill in the profile list appropriately.
 
@@ -259,38 +249,6 @@ public class SeniorDashboardActivity extends AppCompatActivity implements View.O
                 }
             }
         });
-
-
-
-
-
-//        //get() will return all documents
-//        db.collection("profiles").get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                                          @Override
-//                                          public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                                              if(!queryDocumentSnapshots.isEmpty()) {
-//                                                  List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-//                                                  //now convert documentsnapshot to a profile object.
-//
-//                                                  for(DocumentSnapshot d : list){
-//                                                      Profile p = d.toObject(Profile.class);
-//                                                      p.setId(d.getId());
-//                                                      profileList.add(p);
-//                                                      //now all profiles from firestore are loaded into the profileList.
-//
-//                                                  }
-//
-//                                                  //tell the recyclerview to reload with new data.
-//                                                  adapter.notifyDataSetChanged();
-//                                              }
-//
-//                                          }
-//                                      }
-//                );
-
-
-
 
 
     }

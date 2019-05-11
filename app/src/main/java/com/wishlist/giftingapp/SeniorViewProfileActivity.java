@@ -23,8 +23,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.IOException;
 import java.util.List;
 
-import com.wishlist.giftingapp.R;
-
+/*
+This class corresponds to the activity that the senior user sees when he/she first taps on a profile
+within the seniorDashnoardActivity.
+ */
 public class SeniorViewProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editText;
@@ -60,17 +62,6 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
 
 
 
-//        RelativeLayout relativeLayout = new RelativeLayout(this);
-//        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.MATCH_PARENT,
-//                RelativeLayout.LayoutParams.MATCH_PARENT
-//        );
-//        relativeLayout.setLayoutParams(relativeParams);
-//        setContentView(relativeLayout);
-
-
-
-
         //initialize animation
         frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
         profileInfo = (Button) findViewById(R.id.buttonEditInfo_Senior);
@@ -94,8 +85,6 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
 
 
         mAuth = FirebaseAuth.getInstance();
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         textView = (TextView) findViewById(R.id.toolbarEditProfile);
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -185,7 +174,6 @@ public class SeniorViewProfileActivity extends AppCompatActivity implements View
                 startActivity(intent);
                 break;
             case R.id.buttonEditWishlist_Senior:
-                //finish();
 
                 Intent intentWishlist = new Intent(this, SeniorWishlistDashboard.class);
                 intentWishlist.putExtra("profile", profile);

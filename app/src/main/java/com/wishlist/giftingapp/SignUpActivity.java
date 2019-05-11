@@ -4,17 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
-import android.widget.Toast;
-import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,8 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
-import com.wishlist.giftingapp.R;
-
+/*
+Activity to allow a user to create a new account.  After account creation, the new account is automatically
+logged in and a new user is inserted into the "users" collection within the database.
+ */
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editTextEmail, editTextPassword;
@@ -45,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         //initialize animations
         frombottom = AnimationUtils.loadAnimation(this,R.anim.frombottom);
-//        fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
 
         buttonCreateAccountSignUp = (Button) findViewById(R.id.buttonCreateAccountSignUp);
         textViewSignUp = (TextView) findViewById(R.id.textViewCreateAccountLoginReturn);
@@ -149,9 +149,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
 
 
-//                    Intent intent = new Intent(getBaseContext(), AdminDashboardActivity.class);
-//                    intent.putExtra("userType", userType);
-//                    startActivity(intent);
                 }
                 else{
                     if(task.getException() instanceof FirebaseAuthUserCollisionException){
@@ -160,7 +157,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     else {
                         Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    //Toast.makeText(getApplicationContext(), "Registration error -- try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -185,25 +181,3 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 }
 
-
-
-//OnClickListener method: extracts input within the EditText when the Button is pressed.
-//        buttonCreateAccount.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            email = editTextUsername.getText().toString();
-//            password = editTextPassword.getText().toString();
-//
-//            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if(task.isSuccessful()) {
-//                        Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else{
-//                        Toast.makeText(getApplicationContext(), "Registration error -- try again", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//
-//}

@@ -20,6 +20,11 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+/*
+This class allows senior user to connect to thier admin account(s).  The senior users has the option of entering
+admin emails (up to 4) and hitting the save button to update their "AdminEmail" fields within the database.
+ */
+
 public class SeniorAddAdminActivity extends AppCompatActivity implements View.OnClickListener {
     EditText editTextEnterEmail1;
     EditText editTextEnterEmail2;

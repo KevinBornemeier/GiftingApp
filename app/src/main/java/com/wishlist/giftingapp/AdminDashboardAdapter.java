@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import com.wishlist.giftingapp.R;
 
+/*
+Adapter for the admin Dashboard.  This is required to set the profiles within the recycler view.
+ */
 
 public class AdminDashboardAdapter extends RecyclerView.Adapter<AdminDashboardAdapter.ViewHolder> {
 

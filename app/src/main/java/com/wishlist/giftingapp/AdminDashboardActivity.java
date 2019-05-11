@@ -1,3 +1,8 @@
+
+/*
+This class modifies the admin dashboard functionality.
+ */
+
 package com.wishlist.giftingapp;
 
 import android.content.Intent;
@@ -84,7 +89,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         //verify that the user is an admin.  If not, send them to the senior view.
         CollectionReference usersCollectionRef = db.collection("users");
 
-        //useful video for queries: https://www.youtube.com/watch?v=691K6NPp2Y8
+        //useful video for Firebase queries: https://www.youtube.com/watch?v=691K6NPp2Y8
 
         Query userTypeQuery = usersCollectionRef
                 .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -98,10 +103,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
 
                     for(QueryDocumentSnapshot document: task.getResult()){
                         User user = document.toObject(User.class);
-                        //Toast.makeText(MainActivity.this, user.getUserType(), Toast.LENGTH_LONG).show();
 
                         userType = user.getUserType();
-                        //testUserID = user.getUserId();
 
                                     /*
                                     At this point, userType should be set accordingly.  Now send the user to the correct activity.
@@ -139,15 +142,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
 
         profileList = new ArrayList<>();
 
-        //dummy data test
-//        for(int i = 0; i<=10; i++) {
-//            ListItem listItem = new ListItem(
-//                "heading" + (i+1),
-//                "dummy text"
-//            );
-//
-//            listItems.add(listItem);
-//        }
 
         //set adapter to the recycler view
         adapter = new AdminDashboardAdapter(this, profileList);
@@ -181,35 +175,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
 
             }
         });
-
-
-//        //get() will return all documents
-//        db.collection("profiles").get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                                          @Override
-//                                          public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                                              if(!queryDocumentSnapshots.isEmpty()) {
-//                                                  List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-//                                                  //now convert documentsnapshot to a profile object.
-//
-//                                                  for(DocumentSnapshot d : list){
-//                                                      Profile p = d.toObject(Profile.class);
-//                                                      p.setId(d.getId());
-//                                                      profileList.add(p);
-//                                                      //now all profiles from firestore are loaded into the profileList.
-//
-//                                                  }
-//
-//                                                  //tell the recyclerview to reload with new data.
-//                                                  adapter.notifyDataSetChanged();
-//                                              }
-//
-//                                          }
-//                                      }
-//                );
-
-
-
 
 
     }

@@ -8,13 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import com.wishlist.giftingapp.R;
-
-
+/*
+Adapter class to list profiles within the recycler view for senior users.
+ */
 public class SeniorDashboardAdapter extends RecyclerView.Adapter<SeniorDashboardAdapter.ViewHolder> {
 
     private List<Profile> profileList;
