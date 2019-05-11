@@ -4,6 +4,10 @@ import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 
+
+/*
+* This class exists to populate the JSON files for Wishlist Items in the firestore database.
+* */
 public class WishlistItem implements Serializable {
 
     @Exclude

@@ -14,7 +14,9 @@ import com.wishlist.giftingapp.Profile;
 
 import com.wishlist.giftingapp.R;
 
-
+/*
+* This class allows the admin to update the wishlist for profiles and add items based on amazon links.
+* */
 public class UpdateProfileWishlistActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView textViewProfileName;

@@ -23,6 +23,9 @@ import java.util.List;
 
 import com.wishlist.giftingapp.R;
 
+/*
+    This class populates the senior wishlsit dashboard based on profiles pulled from admin accounts.
+ */
 public class SeniorWishlistDashboard extends AppCompatActivity implements View.OnClickListener{
 
     private List<WishlistItem> itemList;

@@ -1,5 +1,8 @@
 package com.wishlist.giftingapp;
 
+/*
+ * This class exists to populate the JSON files for Users in the firestore database.
+ * */
 public class User  {
 
 

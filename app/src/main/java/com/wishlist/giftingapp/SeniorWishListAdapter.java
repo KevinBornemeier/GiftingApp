@@ -18,7 +18,9 @@ import java.util.List;
 
 import com.wishlist.giftingapp.R;
 
-
+/*
+    Recycler view for the Senior wishlist.
+ */
 public class SeniorWishListAdapter extends RecyclerView.Adapter<SeniorWishListAdapter.ItemViewHolder>{
 
     private List<WishlistItem> itemList;

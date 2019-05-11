@@ -132,6 +132,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
 
     }
 
+    //Authenticates the user so that they can access the database.
     @Override
     protected void onStart() {
         super.onStart();
@@ -144,8 +145,6 @@ public class UpdateProfilePictureActivity extends AppCompatActivity implements V
 
 
     // Pull user information from the database including username, profile picture, and status of email verification.
-
-
     private void loadUserInformation() {
         final FirebaseUser user = mAuth.getCurrentUser();
 
